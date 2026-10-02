@@ -29,6 +29,9 @@ zordur. Bu paket MIT lisanslıdır ve Türkçe kurallarla çalışır.
 - Uzun ünlüler korunur (â, î, û). ğ önceki ünlüyü uzatır ya da düşer: `dağ → daː`, `ağaç → aatʃ`.
 - Sayılar, yüzdeler, ondalıklar ve sık kısaltmalar sözcüğe açılır:
   `%12,5 → yüzde on iki virgül beş`, `1.250 km → bin iki yüz elli kilometre`.
+- Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.488 sözcük,
+  Vikisözlük): `nadir → naːdiɾ`, `malum → maːlum`, `metal → metal` (ince l), `kilometre → cilometɾe`.
+  Ekli biçimlerde kök sözlükten, ekler kurallarla okunur.
 - Noktalama korunur; modeller duraklama ve tonlamayı noktalamadan öğrenir.
 
 **Sözcük vurgusu** (`vurgu=True`): vurgulu hecenin önüne `ˈ` konur. Kurallar Türkçe vurgu

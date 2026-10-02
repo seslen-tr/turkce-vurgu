@@ -12,6 +12,8 @@ Türkçe yazıldığı gibi okunur; birkaç kural yeter:
   - ğ: ünsüzden / sözcük sonundan önce önceki ünlüyü uzatır (dağ → daː);
     iki ünlü arasında düşer (ağaç → aatʃ).
   - Sayılar, yüzde, birkaç kısaltma sözcüğe açılır (sayi.py).
+  - Yazımda görünmeyen uzun ünlü ve ince l/k/g okunuş sözlüğünden (veri/okunus.tsv,
+    Vikisözlük): memur → meːmuɾ, metal → metal, kilometre → cilometɾe.
 Noktalama korunur (, . ! ? ; : …): öğrenci duraklamayı ve tonlamayı ondan öğrenir.
 vurgu=True: vurgulu hecenin önüne ˈ (vurgu.py; özel adlar büyük harf ve kesme
 işaretinden, normalleştirmeden ÖNCE bulunur).
@@ -25,6 +27,8 @@ from __future__ import annotations
 import re
 import sys
 import unicodedata
+from functools import lru_cache
+from pathlib import Path
 
 from .sayi import okunus as _okunus
 from .vurgu import _ek_mi, heceler, vurgulu_hece
@@ -127,10 +131,43 @@ def sozcuk_vurgusu(p: str, kokler: set[str] = frozenset()) -> int | None:
     return vurgulu_hece(p, ozel)
 
 
+@lru_cache(maxsize=1)
+def _okunus_sozlugu() -> dict[str, str]:
+    """veri/okunus.tsv: yazımda görünmeyen uzun ünlü ve ince l/k/g (Vikisözlük, CC BY-SA 4.0)."""
+    yol = Path(__file__).resolve().parent / "veri" / "okunus.tsv"
+    if not yol.exists():
+        return {}
+    return dict(s.split("\t") for s in yol.read_text(encoding="utf-8").splitlines() if s and not s.startswith("#"))
+
+
+_FONEM = re.compile(r"dʒ|tʃ|[aeiɯoøuy]ː?|.")
+
+
+def _vurgu_koy(fonem: str, k: int) -> str:
+    """IPA dizisinde k. hecenin önüne ˈ koyar (heceleme vurgu.heceler ile aynı kural)."""
+    t = _FONEM.findall(fonem)
+    unlu = [i for i, x in enumerate(t) if x[0] in "aeiɯoøuy"]
+    if k >= len(unlu):
+        return fonem
+    if k == 0:
+        bas = 0
+    else:
+        once, simdi = unlu[k - 1], unlu[k]
+        bas = simdi if simdi - once == 1 else simdi - 1
+    return "".join(t[:bas]) + "ˈ" + "".join(t[bas:])
+
+
 def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False) -> str:
-    """Normalleştirilmiş tek sözcük → IPA. kokler: metnin özel ad kökleri (ozel_kokler)."""
-    harf = None
-    if vurgu:
-        k = sozcuk_vurgusu(p, kokler)
-        harf = None if k is None else heceler(p)[k]
-    return _sozcuk(p, harf)
+    """Normalleştirilmiş tek sözcük → IPA. kokler: metnin özel ad kökleri (ozel_kokler).
+    Sözcük ya da kökü okunuş sözlüğündeyse (memur, metal…) kök oradan, ekler kurallarla okunur."""
+    k = sozcuk_vurgusu(p, kokler) if vurgu else None
+    oz = _okunus_sozlugu()
+    if p in oz:
+        fonem = oz[p]
+    else:
+        kok = max((r for r in oz if p.startswith(r) and len(r) >= 3 and not r.endswith("ğ") and _ek_mi(p[len(r):])),
+                  key=len, default="")
+        fonem = oz[kok] + _sozcuk(p)[len(_sozcuk(kok)):] if kok else None
+    if fonem is None:
+        return _sozcuk(p, None if k is None else heceler(p)[k])
+    return fonem if k is None else _vurgu_koy(fonem, k)

@@ -90,7 +90,60 @@ def main() -> int:
     (HEDEF / "ozel.txt").write_text("# Vikisözlük özel ad madde başları, CC BY-SA 4.0\n" + "\n".join(sorted(ozel)) + "\n",
                                     encoding="utf-8")
     print(f"istisna {len(istisna)}, kişi adı {len(adlar)}, kök {len(kokler)}, eylem {len(fiiller)}, özel ad {len(ozel)}")
+    okunus = okunus_sozlugu()
+    (HEDEF / "okunus.tsv").write_text(
+        "# Vikisözlük (kaikki.org) sesbirimsel IPA, CC BY-SA 4.0 — yazımda görünmeyen uzun ünlü ve ince l/k/g\n"
+        "# sözcük<TAB>okunuş (vurgusuz, turkce_vurgu sembolleriyle)\n"
+        + "\n".join(f"{k}\t{v}" for k, v in sorted(okunus.items())) + "\n", encoding="utf-8")
+    print(f"okunuş istisnası {len(okunus)}")
     return 0
+
+
+def _ipa_norm(ipa: str) -> str:
+    """Vikisözlük sesbirimsel IPA'sı → bizim sembollerimiz (vurgu, hece noktası, bağ yayı, alt sesbirim yok)."""
+    s = ipa.strip("/[] ").replace("͡", "").replace("ˈ", "").replace("ˌ", "").replace(".", "")
+    return s.translate(str.maketrans({"g": "ɡ", "r": "ɾ", "ɛ": "e", "ɑ": "a", "æ": "e", "ʎ": "l"}))
+
+
+def okunus_sozlugu() -> dict[str, str]:
+    """Yalnız uzunluk (ː) ve incelik (l/ɫ, c/k, ɟ/ɡ) farkı olan sözcükler; maddeler çelişirse alınmaz."""
+    from turkce_vurgu.g2p import _sozcuk as sozcuk_okunusu   # saf kurallar (sözlüğün kendisi değil)
+    tablo = str.maketrans("ɫlkcɡɟ", "LLKKGG")
+    aday: dict[str, set[str]] = {}
+    for satir in open(KOK / "veri" / "vikisozluk" / "tr.jsonl", encoding="utf-8"):
+        d = json.loads(satir)
+        w = d.get("word", "")
+        if " " in w or "-" in w or w[:1].isupper():
+            continue
+        kucuk = _kucuk(w)
+        if not HARF.match(kucuk):
+            continue
+        ipa = next((s["ipa"] for s in d.get("sounds", []) if s.get("ipa", "").startswith("/")), None)
+        if ipa:
+            aday.setdefault(kucuk, set()).add(_ipa_norm(ipa))
+    sonuc = {}
+    for kucuk, ipalar in aday.items():
+        if len(ipalar) != 1:
+            continue                                   # eş yazımlı, okunuşu çelişen maddeler (kura, ani)
+        onlar = next(iter(ipalar))
+        biz = sozcuk_okunusu(kucuk)
+        if onlar == biz or onlar.replace("ː", "").translate(tablo) != biz.replace("ː", "").translate(tablo):
+            continue
+        # Birleştir: yalnız Vikisözlük'ün EKLEDİĞİ bilgi alınır — uzunluk ve kural dışı incelik (metal,
+        # pilot). Sesbirimsel yazım ince k/g'yi her zaman işaretlemiyor (git → /ɡit/), kalınlaştırma alınmaz.
+        b, o = biz.replace("ː", ""), onlar.replace("ː", "")
+        birlesik = "".join(oc if (bc, oc) in {("ɫ", "l"), ("k", "c"), ("ɡ", "ɟ")} else bc for bc, oc in zip(b, o))
+        cikti, j = [], 0
+        for ch in onlar:                                # uzunluk işaretlerini birleşik diziye taşı
+            if ch == "ː":
+                cikti.append("ː")
+            else:
+                cikti.append(birlesik[j])
+                j += 1
+        birlesik = "".join(cikti)
+        if birlesik != biz:
+            sonuc[kucuk] = birlesik
+    return sonuc
 
 
 if __name__ == "__main__":

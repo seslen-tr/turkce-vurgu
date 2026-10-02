@@ -35,6 +35,12 @@ class G2P(unittest.TestCase):
         self.assertEqual(g2p("Dikkat! Emin misin?"), "dickat! emin misin?")
         self.assertEqual(g2p("Evet - hayır"), "evet, hajɯɾ")
 
+    def test_okunus_sozlugu(self):                        # Vikisözlük: uzun ünlü, kural dışı ince l
+        self.assertEqual(g2p("nadir"), "naːdiɾ")
+        self.assertEqual(g2p("metal"), "metal")
+        self.assertEqual(g2p("kilometrelerce"), "cilometɾeleɾdʒe")
+        self.assertEqual(g2p("gitmedik"), "ɟitmedic")         # sözlük kuralların inceliğini bozmaz
+
     def test_semboller_kapali(self):
         metin = "Sapanca bölgesinde üç yüz kırk yedi abone kaydı buldum; Serdivan'daki arıza giderildi!"
         self.assertTrue(set(g2p(metin)) <= set(SEMBOLLER), set(g2p(metin)) - set(SEMBOLLER))
