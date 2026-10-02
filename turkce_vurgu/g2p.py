@@ -61,7 +61,17 @@ def _sayi(m: re.Match) -> str:
     return f" {s} "
 
 
-def normallestir(metin: str) -> str:
+try:                                   # isteğe bağlı: tarih, saat, para, kısaltma, Roma rakamı, kesir…
+    from turkce_normalize import normalize as _tam_normalize
+except ImportError:                    # pragma: no cover — yalın kurulumda basit sayı/kısaltma okuyucu
+    _tam_normalize = None
+
+
+def normallestir(metin: str, tam: bool = True) -> str:
+    """Metni okunuşa hazırlar. turkce-normalize kuruluysa (tam=True) önce o çalışır;
+    yoksa yalnız sayılar, yüzde ve birkaç kısaltma açılır."""
+    if tam and _tam_normalize is not None:
+        metin = _tam_normalize(metin)
     s = _kucuk(metin)
     s = re.sub(r"%\s*(\d)", r"yüzde \1", s)
     s = re.sub(r"(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?", _sayi, s)
