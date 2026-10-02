@@ -1,0 +1,181 @@
+# Literatürdeki vurgu örnekleri. Vurgulu hece BÜYÜK harfle (kaynaktaki gibi).
+# sütunlar: örnek  tür  kaynak  özel_kök
+#   tür: kural   = ek/kök kurallarının sınadığı çekimli biçim (asıl ölçü)
+#        sezer   = Sezer kuralı (yer adı, yabancı ad)
+#        sozluk  = literatür listesinden sözlüğe girmiş sözcük (yalnız kapsam denetimi)
+#        belirsiz= yazımdan çözülemez (ör. GİTme "gitme!" / gitME "gitmek"); ölçüye katılmaz
+# (r) işaretli olanlarda kaynağın OCR'ında vurgu kaybolmuş, kaynağın kuralıyla yerleştirildi.
+arabalarDAN	kural	I&O 140
+bırakaCAK	kural	I&O 140
+bırakacakLAR	kural	I&O 140
+kitapLAR	kural	G&K
+kitaplaRIM	kural	G&K
+kitaplarımDA	kural	G&K
+kitaplarımdaKİ	kural	G&K
+kitaplarımdakiLER	kural	G&K
+sepetlerimDEN	kural	Woodard ex.5 / G&K 29
+kırılacakLAR	kural	Woodard ex.5 / G&K 30
+giDER	kural	Ink ex.12
+tarHAnada	kural	Ink ex.64
+kasTAmonudan	kural	Ink ex.64	kastamonu
+üsKÜdara	kural	Ink ex.64	üsküdar
+afRİkalılardan	kural	Woodard ex.8 / G&K 30
+isKEMlelerimizdeki	kural	G&K
+bonDAN	kural	Ink ex.15	bon
+ofTA	kural	Ink ex.15	of
+karSA	kural	Ink ex.15	kars
+bıRAKmadı	kural	I&O 141 (r)
+GİTmedik	kural	G&K
+SEVmiyor	kural	G&K
+KAÇmasın	kural	Woodard
+oKUmayacak	kural	Ink ex.62
+GİTmemeli	kural	Ink ex.62
+bıRAKmıyor	kural	Ink ex.70
+GELmeyince	kural	Ink ex.70
+YAPmayarak	kural	I&O Table I (r)
+anlaTAmıyorum	kural	Woodard
+bakMAZdık	kural	G&K
+yazMAyız	kural	G&K
+BAKmadan	kural	G&K
+öğrenCİyim	kural	G&K
+uYUrum	kural	G&K
+anlaMIŞsın	kural	G&K
+gidiYORum	belirsiz	Woodard (Ink'in giDİyor / geLİyordunuz'uyla çelişiyor)
+buLUrum	kural	I&O fn.4
+isTANbuldaydım	kural	G&K 34	istanbul
+tarHAnaydıysa	kural	I&O Table I (r)
+okulDAymışlar	kural	G&K
+gelSEymiş	kural	G&K
+giDERse	kural	G&K
+geldiLERse	kural	G&K
+bisikLETse	kural	G&K
+okuyaCAKtır	kural	G&K
+kiraLIKtır	kural	Woodard
+saklanMIŞtırlar	kural	Yawney ex.6
+otuRURken	kural	G&K
+oTURken	kural	Woodard
+evDEYken	kural	Woodard
+araBAyla	kural	I&O 141
+keDİyle	kural	Ink ex.61
+patlıCANla	kural	Ink ex.61
+eLİyle	kural	G&K
+aLİyle	kural	G&K	ali
+bisikLETle	kural	G&K
+tekmeLEyin	kural	Ink ex.61
+güZELce	kural	Ink ex.61
+inSANca	kural	Ink ex.61
+kaDINca	kural	G&K
+çoCUKça	kural	G&K
+tatLIca	kural	Ink
+akŞAMleyin	kural	Ink ex.61
+hayVANcasına	kural	I&O 141
+uÇARcasına	kural	G&K
+yaPIyor	kural	Ink ex.61
+giDİyor	kural	Ink ex.61
+yaPArak	kural	Ink ex.61
+giDErek	kural	Ink ex.61
+geLİnce	kural	Ink ex.61
+yaPInca	kural	Ink ex.61
+geLİyorsa	kural	Ink ex.63
+geLİyordunuz	kural	Ink ex.63
+yüRÜyorum	kural	Woodard
+seVİyor	kural	G&K
+kaZArak	kural	G&K
+bakMAKsızın	kural	G&K
+tuTUver	kural	G&K
+şaŞAkaldım	kural	G&K
+geLİyorlar	kural	G&K
+tuTUvermiş	kural	G&K
+tuTUveriyor	kural	G&K
+avRUpalılaşarak	kural	I&O Table I (r)
+abLUkalayınca	kural	I&O Table I (r)
+mekSİkalılaşıyor	kural	I&O Table I (r)
+ANkaralılaşıyor	kural	Ink ex.73	ankara
+yaPIverince	kural	I&O Table I
+bıraKIverek	belirsiz	I&O Table I (biçim kaynakta kesik: bırakıver+erek?)
+GELmesin	kural	Ink ex.69
+yorGUNum	belirsiz	G&K (ek-eylem / iyelik)
+tutSAKlar	belirsiz	G&K (yüklem -lAr / çoğul)
+BIRAKma	belirsiz	I&O 141 (olumsuz emir / ad)
+KAÇma	belirsiz	Woodard (olumsuz emir / ad)
+YAPın	belirsiz	Ink ex.61 (emir / yapı+n)
+KIşın	belirsiz	G&K (zarf / tamlayan)
+ANkara	sezer	I&O 143	ankara
+aDAna	sezer	I&O 143	adana
+eDİRne	sezer	I&O 143	edirne
+isTANbul	sezer	I&O 143	istanbul
+anTALya	sezer	Ink ex.10	antalya
+şaMANdıra	sezer	Ink ex.10	şamandıra
+BEbek	sezer	I&O 143	bebek
+baKAcak	sezer	I&O 143	bakacak
+TORbalı	sezer	I&O 143	torbalı
+kanDİLli	sezer	Ink ex.11	kandilli
+ayRANcı	sezer	Ink ex.11	ayrancı
+kuzGUNcuk	sezer	Ink ex.11	kuzguncuk
+SİRkeci	sezer	Ink ex.11	sirkeci
+kaVAKlı	sezer	Ink ex.11	kavaklı
+kuLAKsız	sezer	Ink ex.11	kulaksız
+oVAcık	sezer	Ink ex.11	ovacık
+boYAcı	sezer	Ink ex.11	boyacı
+arKANsas	sezer	Ink ex.10	arkansas
+santaMOnika	sezer	Ink ex.10	santamonika
+kaliFORniya	sezer	Ink ex.10	kaliforniya
+monTAna	sezer	Ink ex.10	montana
+kaDİLlak	sezer	Ink ex.10	kadillak
+oREgon	sezer	Ink ex.10	oregon
+keNEdi	sezer	Ink ex.10	kenedi
+papaDOpulos	sezer	I&O 143	papadopulos
+hindisTAN	sezer	I&O 149	hindistan
+bulgarisTAN	sezer	I&O 149	bulgaristan
+kağıthaNE	sezer	I&O 150	kağıthane
+anadoLU	sezer	I&O 143	anadolu
+SulTAniye	sezer	I&O 150	sultaniye
+süleyMAniye	sezer	I&O 150	süleymaniye
+kaRAköy	sezer	Woodard	karaköy
+çaNAKkale	sezer	Woodard	çanakkale
+ŞİMdi	sozluk	G&K 27
+BELki	sozluk	G&K 27
+YArın	sozluk	G&K 27
+ANcak	sozluk	G&K 27
+BAzen	sozluk	Yawney
+LÜTfen	sozluk	Yawney
+ZAten	sozluk	Yawney
+muhTEmelen	sozluk	Yawney
+NAdiren	sozluk	Yawney
+HANgi	sozluk	G&K
+HAni	sozluk	G&K
+NAsıl	sozluk	G&K
+NİÇin	sozluk	G&K
+NEreye	sozluk	G&K
+NErede	sozluk	G&K
+Orada	sozluk	G&K
+FAkat	sozluk	Woodard / Yawney
+Acaba	sozluk	Yawney
+AMca	sozluk	Yawney
+ÇANta	sozluk	Yawney
+baRAka	sozluk	Yawney
+NEgatif	sozluk	Yawney
+akVARyum	sozluk	Yawney
+fabRİka	sozluk	Yawney
+loKANta	sozluk	G&K
+BANka	sozluk	G&K
+isKEMle	sozluk	G&K
+TAKsi	sozluk	G&K
+LObi	sozluk	G&K
+FUTbol	sozluk	G&K
+poliTİka	sozluk	G&K
+isKEle	sozluk	G&K
+tarHAna	sozluk	Ink
+abLUka	sozluk	Ink
+PEnaltı	sozluk	I&O
+BUgün	sozluk	I&O 144
+BAŞbakan	sozluk	G&K
+BUZdolabı	sozluk	G&K
+kaSIMpatı	sozluk	G&K
+deREotu	sozluk	G&K
+KAPkara	sozluk	G&K
+Ufacık	sozluk	G&K
+taMAmen	sozluk	G&K
+alışveRİŞ	kural	G&K (son heceli birleşik)
+bilgisaYAR	kural	G&K
+kabakuLAK	kural	G&K
