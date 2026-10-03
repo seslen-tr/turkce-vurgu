@@ -30,7 +30,8 @@ class Vurgu(unittest.TestCase):
     def test_vurgu_almayan_ekler(self):                        # Ink ex.61–62, 70; G&K 32–34
         for w, b in [("gitmedik", "ˈgitmedik"), ("okumayacak", "oˈkumayacak"), ("gelmeyince", "ˈgelmeyince"),
                      ("arabayla", "araˈbayla"), ("güzelce", "güˈzelce"), ("okuyacaktır", "okuyaˈcaktır"),
-                     ("oturken", "oˈturken"), ("okuldaymışlar", "okulˈdaymışlar"), ("öğrenciyim", "öğrenˈciyim")]:
+                     ("oturken", "oˈturken"), ("okuldaymışlar", "okulˈdaymışlar"), ("öğrenciyim", "öğrenˈciyim"),
+                     ("geçmeyin", "ˈgeçmeyin"), ("dokunmayınız", "doˈkunmayınız")]:     # olumsuz emir: -mA- + -(y)In
             self.assertEqual(isaretle(w), b)
 
     def test_vurgu_ceken_ekler(self):                          # Ink ex.54, 61; G&K

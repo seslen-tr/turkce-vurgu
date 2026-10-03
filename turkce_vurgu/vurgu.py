@@ -223,7 +223,8 @@ def _ek_adaylari(w: str, bas: list[int], ilk: int) -> list[int]:
 
     # ── olumsuzluk -mA- (I&O 141; Ink ex.61–62, 70) ────────────────────────────────────────────
     m = re.search(r"(m[ae])(d[ıi](m|n|k|n[ıi]z|l[ae]r)?(s[ae]|ysa|ydı|ymış)?|m[ıi]ş\w*|d[ae]n|y[ae]c[ae][kğ]\w*|"
-                  r"y[ae]l[ıi]m|y[ıi]p|y[ıi]nc[ae]|y[ae]r[ae]k|s[ıi]n(l[ae]r)?|m[ae]l[ıi]\w*|s[ae]\w*)$", w)
+                  r"y[ae]l[ıi]m|y[ıi]p|y[ıi]nc[ae]|y[ae]r[ae]k|s[ıi]n(l[ae]r)?|m[ae]l[ıi]\w*|s[ae]\w*|"
+                  r"y[ıi]n([ıi]z)?)$", w)                                            # olumsuz emir: GEÇmeyin
     if m and _fiil_govdesi(w[:m.start(1)]):
         once(m, 1)                                                                   # GİTmedik, oKUmayacak
     m = re.search(r"(m[ıiuü])yor", w)
