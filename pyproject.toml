@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,7 +7,8 @@ name = "turkce-vurgu"
 version = "0.1.0"
 description = "Türkçe G2P ve sözcük vurgusu: metin → vurgu işaretli IPA (espeak'siz, ses sentezi için)"
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT AND CC-BY-SA-4.0"
+license-files = ["LICENSE"]
 requires-python = ">=3.9"
 dependencies = []
 
@@ -19,8 +20,8 @@ Issues = "https://github.com/seslen-tr/turkce-vurgu/issues"
 [project.optional-dependencies]
 tam = ["turkce-normalize>=0.1"]
 
-[tool.setuptools]
-packages = ["turkce_vurgu"]
+[tool.setuptools.packages.find]
+include = ["turkce_vurgu*"]
 
 [tool.setuptools.package-data]
 turkce_vurgu = ["veri/*.tsv", "veri/*.txt"]
