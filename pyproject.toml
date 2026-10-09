@@ -11,6 +11,11 @@ license = { text = "MIT" }
 requires-python = ">=3.9"
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/seslen-tr/turkce-vurgu"
+Source = "https://github.com/seslen-tr/turkce-vurgu"
+Issues = "https://github.com/seslen-tr/turkce-vurgu/issues"
+
 [project.optional-dependencies]
 tam = ["turkce-normalize>=0.1"]
 

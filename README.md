@@ -114,7 +114,7 @@ sembolleri kullanır. Bu modellerin önceden eğitilmiş metin gömmeleri doğru
 
 ## İlgili projeler
 
-- **[turkce-plbert](../turkce-plbert):** bu paketin vurgulu okunuşuyla eğitilmiş Türkçe PL-BERT.
+- **[turkce-plbert](https://github.com/seslen-tr/turkce-plbert):** bu paketin vurgulu okunuşuyla eğitilmiş Türkçe PL-BERT.
   StyleTTS2/Kokoro gibi modellerde tonlamayı besler.
 
 ## Test
