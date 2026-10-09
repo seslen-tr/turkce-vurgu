@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "turkce-vurgu"
-version = "0.1.0"
+version = "0.1.1"
 description = "Türkçe G2P ve sözcük vurgusu: metin → vurgu işaretli IPA (espeak'siz, ses sentezi için)"
 readme = "README.md"
 license = "MIT AND CC-BY-SA-4.0"

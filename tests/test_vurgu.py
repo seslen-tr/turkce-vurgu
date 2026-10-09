@@ -58,6 +58,18 @@ class Vurgu(unittest.TestCase):
         self.assertEqual(isaretle("gelmeli"), "gelmeˈli")       # -mAlI gereklilik, olumsuz değil
         self.assertEqual(isaretle("düşünce"), "düşünˈce")       # ad, -IncE değil
 
+    def test_ek_eylem_ad_sonrasi(self):                        # G&K 32: ek-eylem vurgu almaz
+        for w, b in [("varmış", "ˈvarmış"), ("yokmuş", "ˈyokmuş"), ("vardır", "ˈvardır"), ("yoktu", "ˈyoktu"),
+                     ("yoksa", "ˈyoksa"), ("güzelmiş", "güˈzelmiş"), ("çocukmuş", "çoˈcukmuş")]:
+            self.assertEqual(isaretle(w), b)
+        self.assertEqual(isaretle("gelmiş"), "gelˈmiş")         # eylemden sonra -mIş zaman eki
+
+    def test_olumsuz_emir_cumle_sonunda(self):
+        self.assertEqual(g2p("Acele etme.", vurgu=True), "adʒeˈle ˈetme.")
+        self.assertEqual(g2p("Korkma, buradayım.", vurgu=True).split(",")[0], "ˈkoɾkma")
+        self.assertEqual(g2p("Gitme isteği.", vurgu=True).split()[0], "ɟitˈme")     # ad: yan cümle sonu değil
+        self.assertEqual(g2p("Dondurma.", vurgu=True), "donduɾˈma.")               # yerleşik ad
+
     def test_sezer(self):                                      # Sezer 1981; I&O 143
         self.assertEqual(sezer("ankara"), 0)
         self.assertEqual(sezer("istanbul"), 1)

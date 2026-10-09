@@ -9,4 +9,4 @@ from .vurgu import heceler, isaretle, sezer, vurgulu_hece
 
 __all__ = ["g2p", "normallestir", "ozel_kokler", "sozcuk_okunusu", "SEMBOLLER",
            "heceler", "isaretle", "sezer", "vurgulu_hece"]
-__version__ = "0.1.0"
+__version__ = "0.1.1"

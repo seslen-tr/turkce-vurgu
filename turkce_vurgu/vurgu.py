@@ -20,7 +20,8 @@ Algoritma (O&I; I&O "innermost wins"; Ink "leftmost nonneutral wins"):
   2. En SOLDAKİ aday kazanır.
   3. Aday yoksa son hece (I&O s.140).
 Yazımdan çözülemeyen ikilikler (GİTme "gitme!" / gitME "gitmek"; -(y)Im ek-eylem / iyelik;
-yüklem -lAr / çoğul) bağlamsız çözülemez: vurgulanabilir okuma (son hece) seçilir.
+yüklem -lAr / çoğul) bağlamsız çözülemez: vurgulanabilir okuma (son hece) seçilir. Tek bağlam ipucu:
+cümle ya da yan cümle sonundaki yalın eylem+mA olumsuz emirdir (acele ETme., KORKma!).
 
 Hece: her ünlü bir hece; iki ünlü arasındaki tek ünsüz sonraki heceye, birden çoksa yalnız
 sonuncusu sonraki heceye geçer (ka-lem, an-ka-ra, türk-çe).
@@ -50,6 +51,7 @@ tarˈhana abˈluka ˈpenaltı kaˈsımpatı deˈreotu                           
 ˈora ˈbura ˈşura ˈnere                                                                            # G&K: -rA (Orada, NEreye)
 kasˈtamonu ˈzonguldak ˈerzincan üsˈküdar berˈgama belˈçika mekˈsika afˈrika avˈrupa ingilˈtere berˈmuda  # Sezer istisnaları, I&O 143
 eˈminönü ˈsaimbeyli                                                                               # birleşik yer adları, I&O / Woodard
+ˈharika                                                                                           # yaygın söyleyiş (Seslen dinleme, 10.2026)
 """
 # Sezer kuralının İŞLEMEDİĞİ adlar (I&O 149–151): düzenli kök gibi davranır (son hece, ekler vurgu alır).
 SEZERSIZ_SON = re.compile(r"(istan|hane)$")
@@ -75,6 +77,12 @@ _EK = re.compile(r"^$|^[aeıiuü]|^(l[ae]|d[ae]|t[ae]|y[ae]|y[ıiuü]|y[dms]|n[�
 _TUREME = re.compile(r"^(?:[ıiuü]?[ln]|[dt][ıiuü]r|[ıiuü]?ş|[ıiuü]t|t|[ae]r|l[ae]ş|l[ae]|y?[ae])+$")
 _KISA_KOK = {"ora", "bura", "şura", "nere"}
 _INCE_DEGIL = {"düşünce", "gülünce"}           # -IncE gibi biten ad: düşünCE
+# Yalın -mA ile biten, ad olarak yerleşmiş sözcükler: cümle sonunda da emir sayılmaz (dondurMA).
+_MA_AD = set("""
+dondurma dolma sarma kavurma kızartma haşlama doğrama süzme dokuma kazma
+""".split())
+# var/yok + ek-eylem: vurgu kökte (VARdı, YOKmuş, VARdır, YOKsa); varmak eyleminin çekimiyle karışmasın diye ayrı.
+_VAR_YOK = re.compile(r"^(var|yok)(m[ıu]ş|[dt][ıu]|s[ae]|[dt][ıu]r|ken)(l[ae]r|m|n|k|n[ıu]z|s[ıu]n(?:[ıu]z)?|[ıu]m|[ıu]z)?$")
 _ZAMAN = {"sabah", "akşam", "öğle", "öğlen", "gece", "kış", "yaz", "bahar", "güz", "ilkbahar", "sonbahar"}
 
 
@@ -189,8 +197,9 @@ def _son_unlu_hecesi(w: str, i: int) -> int:
     return _hece(heceler(w), j)
 
 
-def _ek_adaylari(w: str, bas: list[int], ilk: int) -> list[int]:
-    """Vurgu çeken ve vurgu almayan eklerin önerdiği heceler; yalnız ilk. harften sonra başlayan ekler."""
+def _ek_adaylari(w: str, bas: list[int], ilk: int, son: bool = False) -> list[int]:
+    """Vurgu çeken ve vurgu almayan eklerin önerdiği heceler; yalnız ilk. harften sonra başlayan ekler.
+    son: sözcük cümle ya da yan cümle sonunda (ardından noktalama ya da metin sonu)."""
     sz = _sozluk()
     n = len(bas)
     aday: list[int] = []
@@ -227,6 +236,9 @@ def _ek_adaylari(w: str, bas: list[int], ilk: int) -> list[int]:
                   r"y[ıi]n([ıi]z)?)$", w)                                            # olumsuz emir: GEÇmeyin
     if m and _fiil_govdesi(w[:m.start(1)]):
         once(m, 1)                                                                   # GİTmedik, oKUmayacak
+    m = re.search(r"(m[ae])$", w)                                                   # olumsuz emir, yan cümle sonunda
+    if son and m and n >= 2 and w not in _MA_AD and _fiil_govdesi(w[:m.start(1)], addan=False):
+        once(m, 1)                                                                   # acele ETme. KORKma!
     m = re.search(r"(m[ıiuü])yor", w)
     if m and _fiil_govdesi(w[:m.start(1)]):
         once(m, 1)                                                                   # GELmiyor, anlaTAmıyor
@@ -240,6 +252,12 @@ def _ek_adaylari(w: str, bas: list[int], ilk: int) -> list[int]:
     # kişi ekinde "karar+ım" (iyelik) ile karışmasın; -DI / -sA / -ken'de ad okuması da aynı vurguyu verir
     if m and _fiil_govdesi(w[:m.start(1)]) and (w[:m.end(1)] not in sz["kokler"] or m.group(2)[0] in "dsk"):
         kendi(m, 1)                                                                  # giDERdik, uYUrum, giDERse
+    if _VAR_YOK.match(w):
+        aday.append(0)                                                               # VARmış, YOKtu, VARdır
+    # ad + ek-eylem -mIş (G&K 32): güZELmiş, çoCUKmuş; eylem gövdesinden sonra -mIş zaman ekidir (gelMİŞ)
+    m = re.search(r"(m[ıiuü]ş)(l[ae]r)?$", w)
+    if m and n >= 2 and (w[:m.start(1)] in sz["kokler"] or w[:m.start(1)] in sz["ozel"])             and not _fiil_govdesi(w[:m.start(1)]):
+        once(m, 1)
     once(re.search(r"m[ıiuü]ş((?:t[ıiuü]|y?d[ıiuü])\w*|s[ae]\w*|[ıiuü]m|[ıiuü]z|s[ıiuü]n(?:[ıiuü]z)?|t[ıiuü]r\w*)$", w), 1)
     once(re.search(r"[ae]c[ae]k((?:t[ıi]|s[ae]|s[ıi]n|t[ıi]r)\w*)$", w), 1)          # okuyaCAKtır, gideCEKsin
     once(re.search(r"[ae]c[ae]ğ([ıi]m|[ıi]z)$", w), 1)                               # geleCEğim
@@ -283,14 +301,15 @@ def _ek_adaylari(w: str, bas: list[int], ilk: int) -> list[int]:
     return aday
 
 
-def vurgulu_hece(w: str, ozel_kok: str = "") -> int | None:
+def vurgulu_hece(w: str, ozel_kok: str = "", son: bool = False) -> int | None:
     """Sözcüğün vurgulu hecesinin sırası; vurgusuz sözcükte None.
-    w küçük harf, yalnız harf; ozel_kok: metinde özel ad olarak tanınan kök (Serdivan'daki → serdivan)."""
+    w küçük harf, yalnız harf; ozel_kok: metinde özel ad olarak tanınan kök (Serdivan'daki → serdivan);
+    son: sözcük cümle ya da yan cümle sonunda."""
     if w in VURGUSUZ or _SORU.match(w):
         return None
     bas = heceler(w)
     kok, ilk = _kok_vurgusu(w, ozel_kok)
-    aday = ([kok] if kok is not None else []) + _ek_adaylari(w, bas, ilk)
+    aday = ([kok] if kok is not None else []) + _ek_adaylari(w, bas, ilk, son)
     aday = [a for a in aday if 0 <= a < len(bas)]
     return min(aday) if aday else len(bas) - 1
 

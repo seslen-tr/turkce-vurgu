@@ -126,19 +126,21 @@ def g2p(metin: str, vurgu: bool = False) -> str:
     s = normallestir(metin)
     parca = re.findall(rf"[a-zçğıöşüâîûwxq]+|[{re.escape(NOKTALAMA)}]", s)
     out = ""
-    for p in parca:
+    for i, p in enumerate(parca):
         if p in NOKTALAMA:
             out = out.rstrip() + p + " "
             continue
-        out += sozcuk_okunusu(p, kokler, vurgu) + " "
+        son = i + 1 == len(parca) or parca[i + 1] in NOKTALAMA        # cümle / yan cümle sonu (olumsuz emir)
+        out += sozcuk_okunusu(p, kokler, vurgu, son) + " "
     return out.strip()
 
 
-def sozcuk_vurgusu(p: str, kokler: set[str] = frozenset()) -> int | None:
-    """Normalleştirilmiş tek sözcüğün vurgulu hecesinin sırası (vurgusuz sözcükte None)."""
+def sozcuk_vurgusu(p: str, kokler: set[str] = frozenset(), son: bool = False) -> int | None:
+    """Normalleştirilmiş tek sözcüğün vurgulu hecesinin sırası (vurgusuz sözcükte None).
+    son: sözcük cümle ya da yan cümle sonunda."""
     ozel = max((k for k in kokler if p.startswith(k) and (p == k or _ek_mi(p[len(k):]) or len(k) >= 4)),
                key=len, default="")
-    return vurgulu_hece(p, ozel)
+    return vurgulu_hece(p, ozel, son)
 
 
 @lru_cache(maxsize=1)
@@ -167,10 +169,10 @@ def _vurgu_koy(fonem: str, k: int) -> str:
     return "".join(t[:bas]) + "ˈ" + "".join(t[bas:])
 
 
-def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False) -> str:
+def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, son: bool = False) -> str:
     """Normalleştirilmiş tek sözcük → IPA. kokler: metnin özel ad kökleri (ozel_kokler).
     Sözcük ya da kökü okunuş sözlüğündeyse (memur, metal…) kök oradan, ekler kurallarla okunur."""
-    k = sozcuk_vurgusu(p, kokler) if vurgu else None
+    k = sozcuk_vurgusu(p, kokler, son) if vurgu else None
     oz = _okunus_sozlugu()
     if p in oz:
         fonem = oz[p]
