@@ -1,5 +1,7 @@
 # turkce-vurgu
 
+> **English:** Turkish grapheme-to-phoneme conversion with lexical stress: text → stress-marked IPA for TTS models, without espeak and without dependencies. Handles exceptional stress (place names, loanwords, pre-stressing suffixes such as negative -mA and the question particle mI) and k/g/l palatalization, which espeak gets wrong for Turkish.
+
 Türkçe metni, ses sentezi (TTS) modellerinin girdisi olan **vurgu işaretli IPA okunuşa**
 çevirir. espeak gerektirmez, bağımlılığı yoktur.
 
