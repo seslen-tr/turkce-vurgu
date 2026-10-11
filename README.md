@@ -9,13 +9,32 @@ Türkçe metni, ses sentezi (TTS) modellerinin girdisi olan **vurgu işaretli IP
 from turkce_vurgu import g2p
 
 g2p("Ankara'ya gitmedik ama yarın gideceğiz, değil mi?", vurgu=True)
-# 'ˈankaɾaja ˈɟitmedic ˈama ˈjaɾɯn ɟidedʒeˈiz, deˈil mi?'
+# 'ˈankaɾaja ˈɟitmedic ˈama ˈjaɾɯn ɟideˈdʒeiz, deˈil mi?'
 ```
 
 ```
 python -m turkce_vurgu "Sapanca gölünün kıyısında yürürken İstanbul'u düşündüm."
 saˈpandʒa ɟølyˈnyn kɯjɯsɯnˈda jyˈɾyɾcen isˈtanbuɫu dyʃynˈdym.
 ```
+
+## Kurulum
+
+```
+pip install turkce-vurgu          # bağımlılıksız
+pip install "turkce-vurgu[tam]"   # + turkce-normalize: tarih, saat, para, Roma rakamı, kesir… da okunur
+```
+
+`python -m turkce_vurgu "metin"` her bağımsız değişkeni ayrı satırda vurgulu okunuşa çevirir.
+
+**API:**
+- `g2p(metin, vurgu=False)` → IPA okunuş; `vurgu=True` vurgulu hecenin önüne `ˈ` koyar.
+- `normallestir(metin, tam=True)` → okunuşa hazırlanmış küçük harfli metin (turkce-normalize kuruluysa
+  önce o çalışır; `tam=False` yalnız paketin kendi sayı/kısaltma okuyucusu).
+- `sozcuk_okunusu(sozcuk, kokler, vurgu, son)` → tek sözcüğün okunuşu; `ozel_kokler(metin)` → metindeki
+  özel ad kökleri.
+- `vurgulu_hece(sozcuk, ozel_kok="", son=False)` → vurgulu hecenin sırası (vurgusuz sözcükte `None`);
+  `isaretle(sozcuk)` → `'loˈkantada'` biçiminde denetim çıktısı; `heceler(sozcuk)`, `sezer(sozcuk)`.
+- `SEMBOLLER` → çıktıda geçebilecek bütün semboller.
 
 ## Neden
 
@@ -31,6 +50,8 @@ zordur. Bu paket MIT lisanslıdır ve Türkçe kurallarla çalışır.
 - Uzun ünlüler korunur (â, î, û). ğ önceki ünlüyü uzatır ya da düşer: `dağ → daː`, `ağaç → aatʃ`.
 - Sayılar, yüzdeler, ondalıklar ve sık kısaltmalar sözcüğe açılır:
   `%12,5 → yüzde on iki virgül beş`, `1.250 km → bin iki yüz elli kilometre`.
+  [turkce-normalize](https://github.com/seslen-tr/turkce-normalize) kuruluysa (`[tam]`) metin önce
+  onunla hazırlanır.
 - Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.488 sözcük,
   Vikisözlük): `nadir → naːdiɾ`, `malum → maːlum`, `metal → metal` (ince l), `kilometre → cilometɾe`.
   Ekli biçimlerde kök sözlükten, ekler kurallarla okunur.
@@ -54,9 +75,14 @@ sözcükteki bütün vurgu adayları toplanır, **en soldaki kazanır**, aday yo
 `Zeynep`). Türkiye illeri ve bazı ilçeler cümle başında da tanınır.
 
 Yazımdan çözülemeyen ikiliklerde vurgulanabilir okuma (son hece) seçilir. Örnekler:
-- GİTme ("gitme!") / gitME ("gitmek");
+- GİTme ("gitme!") / gitME ("gitmek"): tek bağlam ipucu konumdur. Cümle ya da yan cümle sonundaki
+  (ardından noktalama ya da metin sonu gelen) yalın eylem+mA olumsuz emir okunur: acele ˈetme.,
+  ˈkorkma! Yerleşik adlar hariç (dondurˈma). Başka yerde son hece: gitˈme.
 - -(y)Im ek-eylemi / iyelik;
 - yüklem -lAr / çoğul -lAr.
+
+Ek-eylemde iki ayrıntı: var/yok kökten vurgulanır (ˈvarmış, ˈyokmuş, ˈvardır); ad + -(y)mIş vurgu
+almaz (güˈzelmiş, çoˈcukmuş), eylemden sonra ise zaman eki olarak vurgulanır (gelˈmiş).
 
 ## Doğruluk
 
@@ -71,7 +97,9 @@ Yazımdan çözülemeyen ikiliklerde vurgulanabilir okuma (son hece) seçilir. �
 
 Sezer grubundaki 3 hata (santaMOnika, monTAna, papaDOpulos) Sezer kuralının kaynaktaki
 tanımıyla da çelişiyor; Inkelas bu adları kural dışı örnek olarak veriyor. Kaynaklar arasında
-çelişen 2 örnek ve bağlam gerektiren 6 örnek ölçüye katılmadı.
+çelişen 2 örnek ve bağlam gerektiren 6 örnek ölçüye katılmadı. Dosyadaki 43 sözlüksel vurgu örneği
+(ŞİMdi, BELki, YArın…) de toplama girmez: istisna sözlüğünden okunur, hepsi doğrudur.
+Ölçü: `python degerlendirme/literatur.py`.
 
 **Vikisözlük** (`degerlendirme/vikisozluk.py`, 9.030 sözcük, 5 katlı çapraz doğrulama).
 Vikisözlük'ün okunuş şablonu vurgu belirtilmezse son heceyi kendiliğinden işaretler. Bu
@@ -80,8 +108,8 @@ yüzden yalnız son hece dışındaki işaretler güvenilir altın veridir.
   %98,6–98,9 oranında aynı yeri bulur.
 - **Son hece dışı vurgulu sözcükler** (1.234 sözcük, çoğu yabancı kökenli): sözlüğe
   girmemiş bir sözcüğün vurgusunu kurallar ancak özel adlarda tahmin edebilir (%62). Bu
-  vurgu tanım gereği sözlükseldir. Bilinenler `turkce_vurgu/veri/istisna.tsv`
-  sözlüğündedir (1.203 sözcük).
+  vurgu tanım gereği sözlükseldir; bütün grupta oran %22,6'dır. Bilinenler
+  `turkce_vurgu/veri/istisna.tsv` sözlüğündedir (1.203 sözcük).
 
 Karşılaştırma için: espeak-ng'nin Türkçe vurgusu Vikisözlük'le yalnız %55 oranında aynı
 hecede buluşur ([Ghostwriter-Dict](https://github.com/Prosincerity/Ghostwriter-Dict) ölçümü).
@@ -116,12 +144,28 @@ sembolleri kullanır. Bu modellerin önceden eğitilmiş metin gömmeleri doğru
 
 - **[turkce-plbert](https://github.com/seslen-tr/turkce-plbert):** bu paketin vurgulu okunuşuyla eğitilmiş Türkçe PL-BERT.
   StyleTTS2/Kokoro gibi modellerde tonlamayı besler.
+- **[turkce-normalize](https://github.com/seslen-tr/turkce-normalize):** metin hazırlama; `[tam]` ekiyle kullanılır.
+- **[turkce-duygu](https://github.com/seslen-tr/turkce-duygu)** ve **[turkce-uslup](https://github.com/seslen-tr/turkce-uslup):**
+  cümle tonu ve metin üslubu; aynı seslendirme hattının parçaları.
 
 ## Test
 
 ```
-python -m unittest discover -s tests
+python -m unittest discover -s tests      # ya da: pytest -q (CI böyle çalıştırır)
+python degerlendirme/literatur.py         # literatür sınavı
+python degerlendirme/vikisozluk.py        # Vikisözlük ölçüsü; veri/vikisozluk/tr.jsonl (kaikki.org dökümü) ister
 ```
+
+## Düzen
+
+| Yol | İçerik |
+|---|---|
+| `turkce_vurgu/g2p.py` | normalleştirme, harf → IPA, okunuş sözlüğü, `g2p` |
+| `turkce_vurgu/vurgu.py` | hece bölme, kök ve ek vurgu adayları, Sezer kuralı, `vurgulu_hece` |
+| `turkce_vurgu/sayi.py` | tam sayıların okunuşu |
+| `turkce_vurgu/veri/` | `istisna.tsv` (sözlüksel vurgu), `okunus.tsv` (okunuş), `kokler.txt`, `fiiller.txt`, `adlar.txt`, `ozel.txt` (Vikisözlük türevi) |
+| `degerlendirme/` | literatür ve Vikisözlük ölçüleri, sözlük üretimi (`sozluk_uret.py`); `deneysel/` Zemberek denemesi ([README](degerlendirme/deneysel/README.md)) |
+| `tests/` | birim testleri ve `literatur.tsv` (kaynaklı vurgu örnekleri) |
 
 ## English summary
 
