@@ -169,6 +169,22 @@ def _vurgu_koy(fonem: str, k: int) -> str:
     return "".join(t[:bas]) + "ˈ" + "".join(t[bas:])
 
 
+_YUMUSAMA = {"t": ("d", "t", "d"), "p": ("b", "p", "b"), "ç": ("c", "tʃ", "dʒ")}
+
+
+def _yumusak_kok(p: str, oz: dict[str, str]) -> str | None:
+    """Ünlüyle başlayan ekte yumuşayan sözlük kökü: evlat → evladım, kitap → kitabı (okunuş sözlükten, ek kuralla)."""
+    aday = [(r[:-1] + _YUMUSAMA[r[-1]][0], r) for r in oz if len(r) >= 3 and r[-1] in _YUMUSAMA]
+    y, r = max(((y, r) for y, r in aday if p.startswith(y) and len(p) > len(y) and p[len(y)] in UNLU
+                and _ek_mi(p[len(y):])), key=lambda a: len(a[0]), default=("", ""))
+    if not y:
+        return None
+    _, sert, yumusak = _YUMUSAMA[r[-1]]
+    if not oz[r].endswith(sert):
+        return None
+    return oz[r][: -len(sert)] + yumusak + _sozcuk(p)[len(_sozcuk(y)):]
+
+
 def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, son: bool = False) -> str:
     """Normalleştirilmiş tek sözcük → IPA. kokler: metnin özel ad kökleri (ozel_kokler).
     Sözcük ya da kökü okunuş sözlüğündeyse (memur, metal…) kök oradan, ekler kurallarla okunur."""
@@ -179,7 +195,7 @@ def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, 
     else:
         kok = max((r for r in oz if p.startswith(r) and len(r) >= 3 and not r.endswith("ğ") and _ek_mi(p[len(r):])),
                   key=len, default="")
-        fonem = oz[kok] + _sozcuk(p)[len(_sozcuk(kok)):] if kok else None
+        fonem = oz[kok] + _sozcuk(p)[len(_sozcuk(kok)):] if kok else _yumusak_kok(p, oz)
     if fonem is None:
         return _sozcuk(p, None if k is None else heceler(p)[k])
     return fonem if k is None else _vurgu_koy(fonem, k)

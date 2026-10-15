@@ -40,6 +40,8 @@ class G2P(unittest.TestCase):
         self.assertEqual(g2p("metal"), "metal")
         self.assertEqual(g2p("kilometrelerce"), "cilometɾeleɾdʒe")
         self.assertEqual(g2p("gitmedik"), "ɟitmedic")         # sözlük kuralların inceliğini bozmaz
+        self.assertEqual(g2p("evladım"), "evladɯm")           # yumuşayan kök de sözlükten: ince l kalır
+        self.assertEqual(g2p("evlat"), "evlat")
 
     def test_semboller_kapali(self):
         metin = "Sapanca bölgesinde üç yüz kırk yedi abone kaydı buldum; Serdivan'daki arıza giderildi!"
