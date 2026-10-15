@@ -52,6 +52,7 @@ tarˈhana abˈluka ˈpenaltı kaˈsımpatı deˈreotu                           
 kasˈtamonu ˈzonguldak ˈerzincan üsˈküdar berˈgama belˈçika mekˈsika afˈrika avˈrupa ingilˈtere berˈmuda  # Sezer istisnaları, I&O 143
 eˈminönü ˈsaimbeyli                                                                               # birleşik yer adları, I&O / Woodard
 ˈharika                                                                                           # yaygın söyleyiş (Seslen dinleme, 10.2026)
+ˈpeki                                                                                             # G&K 28 (soru/onay sözcükleri)
 """
 # Sezer kuralının İŞLEMEDİĞİ adlar (I&O 149–151): düzenli kök gibi davranır (son hece, ekler vurgu alır).
 SEZERSIZ_SON = re.compile(r"(istan|hane)$")
@@ -229,6 +230,13 @@ def _ek_adaylari(w: str, bas: list[int], ilk: int, son: bool = False) -> list[in
     if m and _fiil_govdesi(w[:m.start(1)]):
         kendi(m, 1)                                                                  # tuTUver, geLİverdi
     kendi(re.search(r"(m[ae]k)s[ıi]z[ıi]n$", w), 1)                                  # bakMAKsızın
+    # yeterlik -(y)Abil ve olumsuzu -(y)AmA: -(y)A hecesi (G&K 30: geLEbilir, yaPAmaz). Gövde+A sözlükte bir eylemse
+    # (ara-, bekle-) -mA olumsuzluktur, yeterlik değil: araMAZ.
+    for desen in (r"(y?[ae])bil", r"(y?[ae])m[ae](?:z|m|y|d)"):                  # -k/-s/-n: kaçamak, basamak
+        m = re.search(desen, w)
+        if (m and m.start(1) > 0 and _fiil_govdesi(w[:m.start(1)], addan=False)
+                and w[:m.start(1) + (2 if w[m.start(1)] == "y" else 1)] not in sz["fiiller"]):
+            kendi(m, 1)
 
     # ── olumsuzluk -mA- (I&O 141; Ink ex.61–62, 70) ────────────────────────────────────────────
     m = re.search(r"(m[ae])(d[ıi](m|n|k|n[ıi]z|l[ae]r)?(s[ae]|ysa|ydı|ymış)?|m[ıi]ş\w*|d[ae]n|y[ae]c[ae][kğ]\w*|"
@@ -249,6 +257,13 @@ def _ek_adaylari(w: str, bas: list[int], ilk: int, son: bool = False) -> list[in
 
     # ── ek-eylem ve kişi ekleri zaman ekinden sonra vurgu almaz (G&K 32–34; I&O fn.4) ──────────
     m = re.search(r"([ae]r|[ıiuü]r|m[ae]z)(d[ıiuü]\w*|s[ae]\w*|[ıiuü]m|[ıiuü]z|s[ıiuü]n(?:[ıiuü]z)?|ken)$", w)
+    if (m and not _fiil_govdesi(w[:m.start(1)]) and _fiil_govdesi(w[:m.start(1) + 1], addan=False)
+            and w[m.start(1) + 1] == "r"):
+        # -Im / -Iz iyelikle karışır (yer+im, etki+ler+im): yalnız -sIn, -DI, -sA, -ken
+        m = re.search(r"(?<=[aeıioöuü])(r)(d[ıiuü]\w*|s[ae]\w*|s[ıiuü]n(?:[ıiuü]z)?|ken)$", w)
+        if m:                                                                        # ünlü gövde + -r: isTERsin
+            aday.append(_son_unlu_hecesi(w, m.start(1)))
+            m = None
     # kişi ekinde "karar+ım" (iyelik) ile karışmasın; -DI / -sA / -ken'de ad okuması da aynı vurguyu verir
     if m and _fiil_govdesi(w[:m.start(1)]) and (w[:m.end(1)] not in sz["kokler"] or m.group(2)[0] in "dsk"):
         kendi(m, 1)                                                                  # giDERdik, uYUrum, giDERse
@@ -256,7 +271,8 @@ def _ek_adaylari(w: str, bas: list[int], ilk: int, son: bool = False) -> list[in
         aday.append(0)                                                               # VARmış, YOKtu, VARdır
     # ad + ek-eylem -mIş (G&K 32): güZELmiş, çoCUKmuş; eylem gövdesinden sonra -mIş zaman ekidir (gelMİŞ)
     m = re.search(r"(m[ıiuü]ş)(l[ae]r)?$", w)
-    if m and n >= 2 and (w[:m.start(1)] in sz["kokler"] or w[:m.start(1)] in sz["ozel"])             and not _fiil_govdesi(w[:m.start(1)]):
+    if (m and n >= 2 and (w[:m.start(1)] in sz["kokler"] or w[:m.start(1)] in sz["ozel"])
+            and not _fiil_govdesi(w[:m.start(1)])):
         once(m, 1)
     once(re.search(r"m[ıiuü]ş((?:t[ıiuü]|y?d[ıiuü])\w*|s[ae]\w*|[ıiuü]m|[ıiuü]z|s[ıiuü]n(?:[ıiuü]z)?|t[ıiuü]r\w*)$", w), 1)
     once(re.search(r"[ae]c[ae]k((?:t[ıi]|s[ae]|s[ıi]n|t[ıi]r)\w*)$", w), 1)          # okuyaCAKtır, gideCEKsin

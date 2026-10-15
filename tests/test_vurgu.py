@@ -44,13 +44,23 @@ class Vurgu(unittest.TestCase):
         self.assertEqual(isaretle("bakmazdık"), "bakˈmazdık")
         self.assertEqual(isaretle("yazmayız"), "yazˈmayız")
 
+    def test_yeterlik(self):                                   # G&K 30: -(y)Abil, -(y)AmA'nın -(y)A hecesi
+        for w, b in [("gelebilir", "geˈlebilir"), ("olabilirim", "oˈlabilirim"), ("yapamam", "yaˈpamam"),
+                     ("alınamaz", "alıˈnamaz"), ("gidemedi", "giˈdemedi")]:
+            self.assertEqual(isaretle(w), b)
+        self.assertEqual(isaretle("aramaz"), "araˈmaz")         # ara- eylemi: -mAz olumsuz geniş zaman
+
+    def test_unlu_govde_genis_zaman(self):                     # G&K 32–34: iste+r+sin, kişi eki vurgusuz
+        for w, b in [("istersin", "isˈtersin"), ("söylersin", "söyˈlersin"), ("okursun", "oˈkursun")]:
+            self.assertEqual(isaretle(w), b)
+
     def test_en_soldaki_kazanir(self):                         # Ink ex.69–71
         self.assertEqual(isaretle("bırakmıyor"), "bıˈrakmıyor")
         self.assertEqual(isaretle("gelmesin"), "ˈgelmesin")
 
     def test_sozluksel_kok(self):                              # Ink ex.64; G&K
         for w, b in [("tarhanada", "tarˈhanada"), ("lokantaya", "loˈkantaya"), ("şimdi", "ˈşimdi"),
-                     ("orada", "ˈorada")]:
+                     ("orada", "ˈorada"), ("peki", "ˈpeki")]:
             self.assertEqual(isaretle(w), b)
 
     def test_karisan_bicimler(self):

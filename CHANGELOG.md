@@ -6,6 +6,7 @@
 - Ad + ek-eylem -mIş vurgu almaz: güZELmiş, çoCUKmuş (eylemden sonra zaman eki olarak kalır: gelMİŞ).
 - Cümle ya da yan cümle sonundaki yalın eylem+mA olumsuz emir okunur: acele ETme., KORKma! (yerleşik adlar hariç: dondurMA).
 - "harika" ilk heceden: HArika.
+- Yeterlik -(y)Abil ve -(y)AmA: -(y)A hecesi (oLAbilirim, alıNAmaz; G&K 30). Ünlü gövde + geniş zaman -r + -sIn/-DI/-sA/-ken: isTERsin. "peki" ilk heceden (PEki).
 - Okunuş sözlüğündeki kök ünlüyle başlayan ekte yumuşasa da sözlükten okunur: evlat → evladım (ince l kalır), t/p/ç → d/b/c.
 - Ölçüler: literatür sınavı değişmedi (120 / 123, %97,6); Vikisözlük son hece dışı vurgu %22,5 → %22,6.
 - README: örnek çıktısı düzeltildi (`ɟideˈdʒeiz`); kurulum, API ve düzen bölümleri eklendi.
