@@ -8,7 +8,7 @@
 - "harika" ilk heceden: HArika.
 - Yeterlik -(y)Abil ve -(y)AmA: -(y)A hecesi (oLAbilirim, alıNAmaz; G&K 30). Ünlü gövde + geniş zaman -r + -sIn/-DI/-sA/-ken: isTERsin. "peki" ilk heceden (PEki).
 - Okunuş sözlüğündeki kök ünlüyle başlayan ekte yumuşasa da sözlükten okunur: evlat → evladım (ince l kalır), t/p/ç → d/b/c.
-- Ölçüler: literatür sınavı değişmedi (120 / 123, %97,6); Vikisözlük son hece dışı vurgu %22,5 → %22,6.
+- Ölçüler: literatür sınavı değişmedi (120 / 123, %97,6); Vikisözlük son hece dışı vurgu %22,5 → %22,7.
 - README: örnek çıktısı düzeltildi (`ɟideˈdʒeiz`); kurulum, API ve düzen bölümleri eklendi.
 
 ## 0.1.0 — ilk açık sürüm
