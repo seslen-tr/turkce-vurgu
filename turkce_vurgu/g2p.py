@@ -70,6 +70,7 @@ except ImportError:                    # pragma: no cover — yalın kurulumda b
 def normallestir(metin: str, tam: bool = True) -> str:
     """Metni okunuşa hazırlar. turkce-normalize kuruluysa (tam=True) önce o çalışır;
     yoksa yalnız sayılar, yüzde ve birkaç kısaltma açılır."""
+    metin = re.sub(r"<!--.*?(?:-->|$)|<[^>\n]{1,200}>", " ", metin, flags=re.S)      # HTML yorumu ve etiketi
     if tam and _tam_normalize is not None:
         metin = _tam_normalize(metin)
     s = _kucuk(metin)
@@ -79,7 +80,17 @@ def normallestir(metin: str, tam: bool = True) -> str:
                lambda m: KISALTMA[m.group(1)], s)
     s = re.sub(r"[\"“”‘’'()\[\]«»]", "", s)
     s = re.sub(r"\.\.\.", "…", s)
-    s = re.sub(r"\s*[-–—]\s*", ", ", s)
+    # Boşluklu tire ve uzun çizgi ara söz duraklamasıdır ("Ankara — başkent —"); sözcük içi tire değildir:
+    # "ar-ge", "e-devlet", "sentinel-2" 0.1.1'e kadar "ar, ge" diye virgülle (duraklamayla) okunuyordu.
+    s = re.sub(r"\s+[-–—]+\s+|\s*—\s*", ", ", s)
+    s = re.sub(r"[-–‐‑]", " ", s)
+    # Biçim işaretleri (Markdown, kod) okunmaz; modele giderse anlamsız ses olur ("<!--" → gürültü, 03.11.2026).
+    s = re.sub(r"\s*[·•◦▪‣]\s*", ", ", s)                             # madde ayırıcı nokta: duraklama
+    s = re.sub(r"[#*_<>|~^`\\{}=@$/©®™]+", " ", s)
+    # Türkçede olmayan harfler (sözlükte olmayan yabancı sözcük): en yakın Türkçe ses ("librivox" → "librivoks")
+    s = s.replace("x", "ks").replace("w", "v").replace("q", "k")
+    s = re.sub(r"\s*[,;:](?:\s*[,;:])+\s*", ", ", s)                 # işaret silinince kalan art arda virgüller
+    s = re.sub(r"^[\s,;:.]+", "", s)
     return re.sub(r"\s+", " ", s).strip()
 
 

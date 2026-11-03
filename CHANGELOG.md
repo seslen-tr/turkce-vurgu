@@ -1,5 +1,14 @@
 # Değişiklikler
 
+## 0.1.2 — tire ve biçim işaretleri
+
+- `normallestir`: yalnız boşluklu tire ve uzun çizgi duraklama (virgül) olur; sözcük içi tire boşluk ("ar-ge" →
+  "ar ge"; önceden "ar, ge" diye duraklayarak okunuyordu).
+- Biçim işaretleri (`# * _ < > | ~ ^ ` / …`) ve HTML yorumu, etiketi okunuşa girmez: modele giderse anlamsız ses
+  çıkıyordu ("<!--"). Madde ayırıcı nokta (·, •) duraklama olur.
+- Türkçede olmayan harf (sözlükte olmayan yabancı sözcük) en yakın Türkçe sese çevrilir: x → ks, w → v, q → k
+  ("LibriVox" → "librivoks").
+
 ## 0.1.1
 
 - var/yok + ek-eylem kökten vurgulanır: VARmış, YOKmuş, VARdır, YOKtu, YOKsa.

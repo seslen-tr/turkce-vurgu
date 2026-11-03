@@ -31,6 +31,13 @@ class G2P(unittest.TestCase):
         self.assertEqual(normallestir("1.250 km"), "bin iki yüz elli kilometre")
         self.assertEqual(normallestir("İSTANBUL"), "istanbul")
 
+    def test_tire_ve_bicim_isaretleri(self):
+        self.assertEqual(normallestir("Ar-Ge birimi", tam=False), "ar ge birimi")            # sözcük içi tire
+        self.assertEqual(normallestir("Ankara — başkent — büyük.", tam=False), "ankara, başkent, büyük.")
+        self.assertEqual(normallestir("<!-- not --> # Başlık **kalın**", tam=False), "başlık kalın")
+        self.assertEqual(normallestir("göster · katman", tam=False), "göster, katman")
+        self.assertEqual(normallestir("LibriVox ve Wikipedia", tam=False), "librivoks ve vikipedia")
+
     def test_noktalama(self):
         self.assertEqual(g2p("Dikkat! Emin misin?"), "dickat! emin misin?")
         self.assertEqual(g2p("Evet - hayır"), "evet, hajɯɾ")
