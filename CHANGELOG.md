@@ -1,5 +1,13 @@
 # Değişiklikler
 
+## 0.1.3 — turkce-normalize tabanı
+
+- `[tam]` turkce-normalize ≥ 0.1.7 ister. Önceki taban (0.1.4) yükseltmede eski sürümü bırakıyordu (`pip install -U`
+  kurulu bağımlılığı gerekmedikçe yükseltmez), o sürümden sonraki düzeltmeler gelmiyordu: bitişik kısaltma
+  ("TBMM" → "tebememe"), alan adı ("github.com" → "githab nokta kom"), "saat"siz noktalı saat ("06.45'te"), baştaki
+  sıfır ("TR-042"), "dört" yumuşaması ("4'e" → "dörde"), ekli Roma rakamı ("Bölüm III'te").
+- CITATION.cff sürümü güncellendi (0.1.1'de kalmıştı).
+
 ## 0.1.2 — tire ve biçim işaretleri
 
 - `normallestir`: yalnız boşluklu tire ve uzun çizgi duraklama (virgül) olur; sözcük içi tire boşluk ("ar-ge" →
