@@ -1,5 +1,17 @@
 # Değişiklikler
 
+## 0.1.5 — büyük harfli sıradan sözcük
+
+- Büyük harfle yazılan sıradan sözcük özel ad vurgusu (Sezer) almaz: "Bugün Pazar" → "paˈzar" (önceden "ˈpazar"),
+  "Büyük Millet Meclisi" → "milˈlet medʒliˈsi", "Dünya Sağlık Örgütü'nde" → "saːˈɫɯk øɾɟytynˈde", başlık ve
+  etiketlerde "Madde", "Komut", "Yorum", "Abone". Kökü yalnız sözlükte olan ya da hem sözlükte hem özel ad
+  listesinde olup il / kişi adı olmayan sözcük kesmesizse sıradandır; kesmeli yazım özel ad kalır ("Mısır'a"); gün ve
+  ay adı hep sıradandır (`GUN_AY`). Altı makalenin 3122 sözcüğünde 82 sözcüğün vurgusu düzeldi.
+- Cümle başındaki özel ad, sözlükte sıradan karşılığı yoksa özel ad sayılır: "Rusya ile" → "ˈrusja" (önceden
+  "rusˈja"), "Japonya", "Roma".
+- Sıradan sözcük de olan il adı (ordu, aydın, ağrı, tokat) yalnız büyük harf ya da kesmeyle il adıdır: "ordusu" →
+  "orduˈsu" (önceden "ˈordusu").
+
 ## 0.1.4 — ek zinciri
 
 - Sözlük kökünden sonrası baştan sona ad ya da eylem eki olmalı (önceden yalnız başına bakılıyordu, kökten sonra ne

@@ -31,7 +31,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from .sayi import okunus as _okunus
-from .vurgu import _daha_uzun_kok, _ek_mi, _ek_zinciri, _sozluk, heceler, vurgulu_hece
+from .vurgu import YER_ADLARI, _daha_uzun_kok, _ek_mi, _ek_zinciri, _sozluk, heceler, vurgulu_hece
 
 KALIN = set("aıou")
 INCE = set("eiöü")
@@ -94,18 +94,47 @@ def normallestir(metin: str, tam: bool = True) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+# Gün ve ay adları büyük harfle ve kesmeyle yazılsa da özel ad vurgusu almaz ("Pazar'a", "Mayıs'ta")
+GUN_AY = set("""pazartesi salı çarşamba perşembe cuma cumartesi pazar ocak şubat mart nisan mayıs haziran temmuz
+ağustos eylül ekim kasım aralık""".split())
+
+
+def _sozluk_koku(w: str, kume) -> str:
+    """w'nin kümedeki en uzun kökü (ardı ek zinciri), yoksa ""."""
+    return next((w[:n] for n in range(len(w), 1, -1) if w[:n] in kume and _ek_zinciri(w[n:])), "")
+
+
 def ozel_kokler(metin: str) -> set[str]:
-    """Özel ad kökleri (küçük harf): kesme işaretinden önceki kısım (Serdivan'daki → serdivan) ya da
-    cümle başı olmayan, büyük harfle başlayan sözcük (… Zeynep ile → zeynep)."""
+    """Özel ad kökleri (küçük harf): kesme işaretinden önceki kısım (Serdivan'daki → serdivan), cümle başı olmayan,
+    büyük harfle başlayan sözcük (… Zeynep ile → zeynep) ya da cümle başında sözlükte sıradan sözcük olmayan özel ad
+    (Rusya ile → rusya). 18.11.2026: büyük harfli sıradan sözcük özel ad sayılmaz ("Bugün Pazar" → "ˈpazar",
+    "Dünya Sağlık Örgütü'nde" üç sözcük de ilk hecede vurgulanıyordu): kökü yalnız sözlükte (kokler) olan ya da hem
+    sözlükte hem özel ad listesinde olup il ya da kişi adı olmayan sözcük, kesmesizse sıradandır; gün ve ay adı hep
+    sıradandır."""
+    sz = _sozluk()
+    yer = YER_ADLARI
     kok = set()
     for m in re.finditer(rf"[{_HARF}]+(?:['’][{_HARF}]+)?", metin):
         t = m.group(0)
+        once = metin[:m.start()].rstrip()
+        bas = not once or once[-1] in ".!?…:"
         if "'" in t or "’" in t:
-            kok.add(_kucuk(re.split("['’]", t)[0]))
+            k = _kucuk(re.split("['’]", t)[0])
+            siradan = k in GUN_AY or (k not in sz["ozel"] and k not in yer and _sozluk_koku(k, sz["kokler"])
+                                       and not _sozluk_koku(k, sz["ozel"]))
+            if not siradan:
+                kok.add(k)
         elif len(t) > 2 and t[0].isupper() and not t.isupper():
-            once = metin[:m.start()].rstrip()
-            if once and once[-1] not in ".!?…:":
-                kok.add(_kucuk(t))
+            w = _kucuk(t)
+            oz = _sozluk_koku(w, sz["ozel"] | yer)
+            if bas:                      # cümle başı: yalnız sözlükte sıradan karşılığı olmayan özel ad
+                if oz and oz not in sz["kokler"] and oz not in GUN_AY:
+                    kok.add(w)
+            elif oz:
+                if oz in yer or oz in sz["adlar"] or (oz not in sz["kokler"] and oz not in GUN_AY):
+                    kok.add(w)
+            elif not _sozluk_koku(w, sz["kokler"]):
+                kok.add(w)               # sözlükte hiç yok: büyük olasılıkla ad
     return kok
 
 

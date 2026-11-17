@@ -194,8 +194,9 @@ def _kok_vurgusu(w: str, ozel_kok: str) -> tuple[int | None, int]:
     if w in LITERATUR_SON:
         return None, len(w)
     kok = ozel_kok if ozel_kok and w.startswith(ozel_kok) else \
-        max((a for a in YER_ADLARI if w.startswith(a) and _ek_zinciri(w[len(a):])
-             and not _daha_uzun_kok(w, a, _sozluk()["kokler"], _sozluk()["istisna"])), key=len, default="")
+        max((a for a in YER_ADLARI if w.startswith(a) and _ek_zinciri(w[len(a):]) and a not in sz["kokler"]
+             and not _daha_uzun_kok(w, a, sz["kokler"], ist)), key=len, default="")
+    # sıradan sözcük de olan il adı (ordu, aydın, ağrı, tokat) yalnız büyük harf ya da kesmeyle (ozel_kok) il adıdır
     if kok:
         if kok in ist:
             return ist[kok], len(kok)

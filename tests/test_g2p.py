@@ -72,5 +72,21 @@ class EkZinciri(unittest.TestCase):
             self.assertFalse(_ek_zinciri(ek), ek)
 
 
+class OzelAd(unittest.TestCase):
+    """18.11.2026: büyük harfli sıradan sözcük özel ad vurgusu alıyordu ("Bugün Pazar" → "ˈpazar")."""
+
+    def test_buyuk_harfli_siradan_sozcuk(self):
+        from turkce_vurgu.g2p import ozel_kokler
+        self.assertEqual(ozel_kokler("Bugün Pazar. Büyük Millet Meclisi toplandı."), set())
+        self.assertEqual(ozel_kokler("Dünya Sağlık Örgütü'nde çalışıyor."), set())
+        self.assertEqual(ozel_kokler("Mısır'a gittik, Kanada'ya döndük."), {"mısır", "kanada"})
+        self.assertEqual(ozel_kokler("Rusya ile anlaştılar."), {"rusya"})          # cümle başı, sözlükte değil
+        self.assertIn("van", ozel_kokler("Dün Van Gölü'ne gittik."))
+
+    def test_sıradan_il_adi(self):
+        self.assertEqual(g2p("ordusu", vurgu=True), "oɾduˈsu")
+        self.assertEqual(g2p("Ordu'da doğdu.", vurgu=True), "ˈoɾduda doːˈdu.")
+
+
 if __name__ == "__main__":
     unittest.main()
