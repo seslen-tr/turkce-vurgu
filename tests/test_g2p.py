@@ -55,5 +55,22 @@ class G2P(unittest.TestCase):
         self.assertTrue(set(g2p(metin)) <= set(SEMBOLLER), set(g2p(metin)) - set(SEMBOLLER))
 
 
+class EkZinciri(unittest.TestCase):
+    """18.11.2026: kökten sonrası baştan sona ek olmalı; "hata"+"yda", "kilis"+"ede", "gala"+"tasaray" ek sayılıyordu."""
+
+    def test_sahte_kok_eslesmez(self):
+        self.assertEqual(g2p("Hatay'da", vurgu=True), "ˈhatajda")          # önceden "hataːjda"
+        self.assertEqual(g2p("kilisede", vurgu=True), "ciˈlisede")         # önceden "ˈcilisede"
+        self.assertNotIn("ˈɡa", g2p("Galatasaray", vurgu=True))            # önceden "ˈɡalatasaɾaj"
+        self.assertNotIn("ː", g2p("Adapazarı gazino animasyon", vurgu=False))
+
+    def test_gercek_ekler_kalir(self):
+        from turkce_vurgu.vurgu import _ek_zinciri
+        for ek in ("", "da", "yla", "lerimizde", "nın", "daki", "lılaşarak", "sız", "cık"):
+            self.assertTrue(_ek_zinciri(ek), ek)
+        for ek in ("yda", "tasaray", "no", "masyon"):       # sıra denetlenmez: "azarı" (a+z+ar+ı) geçer
+            self.assertFalse(_ek_zinciri(ek), ek)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -91,6 +91,26 @@ def _ek_mi(kalan: str) -> bool:
     return bool(_EK.match(kalan))
 
 
+# Ad ekleri zinciri, BAŞTAN SONA (18.11.2026): _ek_mi yalnız başa bakıyordu, kökten sonra ne gelirse "ek" sayıldı
+# ("hata"+"yda" → Hatay'da "hataːjda", "gala"+"tasaray" → "ˈgalatasaray"). Sıra denetlenmez, biçim denetlenir;
+# addan türeyen eylemin ekleri de var ("avrupa"+"lılaşarak").
+_EK_PARCA = (r"l[ae]r[ıi]?|[ıiuü]?m[ıiuü]z|[ıiuü]?n[ıiuü]z|[ıiuü]?[mn]|[mnkz]|s?[ıiuü]|y[ıiuü]|y?[ae]|[dt][ae]n?|"
+             r"n[dt][ae]n?|n[ae]|n[ıiuü]n?|[ıiuü]n|y?l[ae]|k[iü]|[dt][ıiuü]r|y?[dt][ıiuü]|y?m[ıiuü]ş|y?s[ae]|y?ken|"
+             r"s[ıiuü]n(?:[ıiuü]z)?|[ıiuü]z|l[ıiuü]k?|s[ıiuü]z|[cç][ıiuü]k?|[cç][ae]|l[ae]ş|d[ae]ş|"
+             r"[ae]r[ae]k|[ıiuü]?yor|y?[ae]c[ae]k|m[ae]k|y?[ıiuü]p|m[ae]z?|[ıiuüae]r|y?[ae]n")   # eylem: laş+arak
+_EK_ZINCIR = re.compile(rf"(?:{_EK_PARCA})*")
+
+
+def _ek_zinciri(kalan: str) -> bool:
+    """kalan baştan sona ad ekleri mi (boş da olur): "da", "yla", "lerimizde" evet; "yda", "tasaray", "nik"…"""
+    return bool(_EK_ZINCIR.fullmatch(kalan))
+
+
+def _daha_uzun_kok(w: str, k: str, *kumeler) -> bool:
+    """w'de k'den uzun, kümelerden birinde olan ve ardı ek zinciri olan bir kök var mı: "kilis" ⊂ "kilise"+"de"."""
+    return any(w[:n] in kume and _ek_zinciri(w[n:]) for n in range(len(k) + 1, len(w) + 1) for kume in kumeler)
+
+
 def heceler(w: str) -> list[int]:
     """Her hecenin başladığı harf konumu."""
     u = [i for i, c in enumerate(w) if c in UNLU]
@@ -174,7 +194,8 @@ def _kok_vurgusu(w: str, ozel_kok: str) -> tuple[int | None, int]:
     if w in LITERATUR_SON:
         return None, len(w)
     kok = ozel_kok if ozel_kok and w.startswith(ozel_kok) else \
-        max((a for a in YER_ADLARI if w.startswith(a) and _ek_mi(w[len(a):])), key=len, default="")
+        max((a for a in YER_ADLARI if w.startswith(a) and _ek_zinciri(w[len(a):])
+             and not _daha_uzun_kok(w, a, _sozluk()["kokler"], _sozluk()["istisna"])), key=len, default="")
     if kok:
         if kok in ist:
             return ist[kok], len(kok)
@@ -186,7 +207,7 @@ def _kok_vurgusu(w: str, ozel_kok: str) -> tuple[int | None, int]:
         return sezer(kok), len(kok)
     if w not in sz["kokler"]:     # sözlükte kendi maddesi olan sözcük (kabakulak) kökten vurgu devralmaz
         for k in sorted((k for k in ist if w.startswith(k) and len(k) < len(w)), key=len, reverse=True):
-            if (len(k) >= 4 or k in _KISA_KOK) and (_ek_mi(w[len(k):]) or k in sz["fiiller"]):
+            if (len(k) >= 4 or k in _KISA_KOK) and (_ek_zinciri(w[len(k):]) or k in sz["fiiller"]):
                 return ist[k], len(k)                                         # tarHAnada, geLİverdi
     return None, 0
 

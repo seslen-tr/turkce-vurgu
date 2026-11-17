@@ -1,5 +1,14 @@
 # Değişiklikler
 
+## 0.1.4 — ek zinciri
+
+- Sözlük kökünden sonrası baştan sona ad ya da eylem eki olmalı (önceden yalnız başına bakılıyordu, kökten sonra ne
+  gelirse "ek" sayılıyordu): "Hatay'da" → "ˈhatajda" (önceden "hata"+"yda": "hataːjda"), "kilisede" → "ciˈlisede"
+  ("kilis"+"ede": "ˈcilisede"), "Galatasaray" ("gala"+"tasaray": "ˈɡalatasaray"), "Adapazarı", "Cezayir", "gazino",
+  "animasyon" sahte uzun ünlüsüz. Sözlükte daha uzun bir kök varsa ("kilise", "selanik") kısa kök uygulanmaz.
+- Vikisözlük okunuş sınavı PER %3,04 → %2,94; literatür vurgusu aynı (kural 90/90, Sezer 30/33).
+- Yeni: `vurgu._ek_zinciri(kalan)`.
+
 ## 0.1.3 — turkce-normalize tabanı
 
 - `[tam]` turkce-normalize ≥ 0.1.7 ister. Önceki taban (0.1.4) yükseltmede eski sürümü bırakıyordu (`pip install -U`

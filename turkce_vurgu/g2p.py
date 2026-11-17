@@ -31,7 +31,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from .sayi import okunus as _okunus
-from .vurgu import _ek_mi, heceler, vurgulu_hece
+from .vurgu import _daha_uzun_kok, _ek_mi, _ek_zinciri, _sozluk, heceler, vurgulu_hece
 
 KALIN = set("aıou")
 INCE = set("eiöü")
@@ -204,8 +204,10 @@ def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, 
     if p in oz:
         fonem = oz[p]
     else:
-        kok = max((r for r in oz if p.startswith(r) and len(r) >= 3 and not r.endswith("ğ") and _ek_mi(p[len(r):])),
+        kok = max((r for r in oz if p.startswith(r) and len(r) >= 3 and not r.endswith("ğ") and _ek_zinciri(p[len(r):])),
                   key=len, default="")
+        if kok and _daha_uzun_kok(p, kok, _sozluk()["kokler"], _sozluk()["ozel"]):
+            kok = ""                   # "sela" ⊂ "selanik": sözlükte olmayan daha uzun kök varsa kural okur
         fonem = oz[kok] + _sozcuk(p)[len(_sozcuk(kok)):] if kok else _yumusak_kok(p, oz)
     if fonem is None:
         return _sozcuk(p, None if k is None else heceler(p)[k])
