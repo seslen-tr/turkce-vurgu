@@ -1,5 +1,21 @@
 # Değişiklikler
 
+## 0.1.6 — şapkasız alıntı, ince l
+
+- Şapkasız yazılan alıntı sözcük şapkalı gibi okunur: "hikaye" → "hicaːje" (önceden "hikaje"), "dükkan" →
+  "dyccan", "rüzgar" → "ɾyzɟaɾ", "mekan", "imkan", "tezgah", "yadigar", "zekat", "katip", "hükumet", "mahkum";
+  ekli biçimler de ("hikayede", "dükkanı"). Kaynak: sözlükte k/g/l'den sonra â ya da û olan kökler (Vikisözlük);
+  şapkalı yazımın Vikisözlük okunuşu kullanılır, yoksa kural. Birkaç uzun ünlülü sözcük de: "dahil" → "daːhil",
+  "halen", "derhal", "adeta". Eşsesliler bağlamsız ayırt edilemez, yazıldığı gibi kalır: kar / kâr, hala / hâlâ,
+  kanun / kânun, ala / âlâ, hal / hâl, adet / âdet. Şapkasız yazımın kendi Vikisözlük kaydı varsa o geçer (`sapka.py`).
+- Ek ünlüsü ince alıntılarda l incedir: "gol" → "ɡol" (önceden "ɡoɫ"; "golü"), "petrol", "kalp", "futbol",
+  "voleybol", "usul", "ihmal", "helal"; Batı alıntılarında şapka yalnız l'yi inceltir, ünlü kısadır: "plan" →
+  "plan" (önceden "pɫan"), "plaj", "plak", "parlamento".
+- Yumuşayan kök, sözlükte daha uzun kök varsa aranmaz: "kalbur" "kalp" + ek sanılmaz.
+- Vikisözlük okunuş sınavında 13 sözcükte bilerek ayrılır (PER %2,94 → %2,95): Vikisözlük "gol", "futbol",
+  "ihmal", "voleybol", "iştigal" için kalın l, "dahil", "aciz" için kısa ünlü, "bekar" için kalın k yazar; TDK'de
+  ekleri ince ("golü", "ihmali"), yazımı "dâhil", "âciz", "bekâr". Literatür ve Vikisözlük vurgu sınavı değişmedi.
+
 ## 0.1.5 — büyük harfli sıradan sözcük
 
 - Büyük harfle yazılan sıradan sözcük özel ad vurgusu (Sezer) almaz: "Bugün Pazar" → "paˈzar" (önceden "ˈpazar"),

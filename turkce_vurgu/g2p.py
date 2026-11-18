@@ -30,6 +30,7 @@ import unicodedata
 from functools import lru_cache
 from pathlib import Path
 
+from .sapka import ek_okunuslar
 from .sayi import okunus as _okunus
 from .vurgu import YER_ADLARI, _daha_uzun_kok, _ek_mi, _ek_zinciri, _sozluk, heceler, vurgulu_hece
 
@@ -185,11 +186,14 @@ def sozcuk_vurgusu(p: str, kokler: set[str] = frozenset(), son: bool = False) ->
 
 @lru_cache(maxsize=1)
 def _okunus_sozlugu() -> dict[str, str]:
-    """veri/okunus.tsv: yazımda görünmeyen uzun ünlü ve ince l/k/g (Vikisözlük, CC BY-SA 4.0)."""
+    """veri/okunus.tsv: yazımda görünmeyen uzun ünlü ve ince l/k/g (Vikisözlük, CC BY-SA 4.0); üstüne şapkasız
+    yazılan alıntılar ve ince l'li alıntılar (sapka.py; Vikisözlük kaydı varsa o geçer)."""
     yol = Path(__file__).resolve().parent / "veri" / "okunus.tsv"
-    if not yol.exists():
-        return {}
-    return dict(s.split("\t") for s in yol.read_text(encoding="utf-8").splitlines() if s and not s.startswith("#"))
+    oz = {} if not yol.exists() else dict(
+        s.split("\t") for s in yol.read_text(encoding="utf-8").splitlines() if s and not s.startswith("#"))
+    for w, ipa in ek_okunuslar(_sozluk()["kokler"], _sozcuk, oz).items():
+        oz.setdefault(w, ipa)
+    return oz
 
 
 _FONEM = re.compile(r"dʒ|tʃ|[aeiɯoøuy]ː?|.")
@@ -217,8 +221,8 @@ def _yumusak_kok(p: str, oz: dict[str, str]) -> str | None:
     aday = [(r[:-1] + _YUMUSAMA[r[-1]][0], r) for r in oz if len(r) >= 3 and r[-1] in _YUMUSAMA]
     y, r = max(((y, r) for y, r in aday if p.startswith(y) and len(p) > len(y) and p[len(y)] in UNLU
                 and _ek_mi(p[len(y):])), key=lambda a: len(a[0]), default=("", ""))
-    if not y:
-        return None
+    if not y or _daha_uzun_kok(p, y, _sozluk()["kokler"], _sozluk()["ozel"]):
+        return None                    # "kalbur" ⊄ "kalp": sözlükte daha uzun kök varsa yumuşama değil
     _, sert, yumusak = _YUMUSAMA[r[-1]]
     if not oz[r].endswith(sert):
         return None

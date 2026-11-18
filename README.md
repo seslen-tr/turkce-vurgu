@@ -54,6 +54,9 @@ zordur. Bu paket MIT lisanslıdır ve Türkçe kurallarla çalışır.
   onunla hazırlanır.
 - Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.488 sözcük,
   Vikisözlük): `nadir → naːdiɾ`, `malum → maːlum`, `metal → metal` (ince l), `kilometre → cilometɾe`.
+- Şapkasız yazılan alıntılar şapkalı gibi okunur: `hikaye → hicaːje`, `dükkan → dyccan`, `rüzgar → ɾyzɟaɾ`,
+  `dahil → daːhil`; eşsesliler yazıldığı gibi kalır (kar / kâr, hala / hâlâ). Ek ünlüsü ince alıntıda l incedir:
+  `gol → ɡol`, `petrol → petɾol`, `kalp → kalp` (`sapka.py`).
   Ekli biçimlerde kök sözlükten, ekler kurallarla okunur.
 - Noktalama korunur; modeller duraklama ve tonlamayı noktalamadan öğrenir.
 
@@ -163,6 +166,7 @@ python degerlendirme/vikisozluk.py        # Vikisözlük ölçüsü; veri/vikiso
 | `turkce_vurgu/g2p.py` | normalleştirme, harf → IPA, okunuş sözlüğü, `g2p` |
 | `turkce_vurgu/vurgu.py` | hece bölme, kök ve ek vurgu adayları, Sezer kuralı, `vurgulu_hece` |
 | `turkce_vurgu/sayi.py` | tam sayıların okunuşu |
+| `turkce_vurgu/sapka.py` | şapkasız yazılan alıntılar ve ince l'li alıntılar (okunuş sözlüğüne eklenir) |
 | `turkce_vurgu/veri/` | `istisna.tsv` (sözlüksel vurgu), `okunus.tsv` (okunuş), `kokler.txt`, `fiiller.txt`, `adlar.txt`, `ozel.txt` (Vikisözlük türevi) |
 | `degerlendirme/` | literatür ve Vikisözlük ölçüleri, sözlük üretimi (`sozluk_uret.py`); `deneysel/` Zemberek denemesi ([README](degerlendirme/deneysel/README.md)) |
 | `tests/` | birim testleri ve `literatur.tsv` (kaynaklı vurgu örnekleri) |

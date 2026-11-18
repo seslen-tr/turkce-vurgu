@@ -88,5 +88,31 @@ class OzelAd(unittest.TestCase):
         self.assertEqual(g2p("Ordu'da doğdu.", vurgu=True), "ˈoɾduda doːˈdu.")
 
 
+class Sapkasiz(unittest.TestCase):
+    """18.11.2026: şapkasız yazılan alıntıda k/g/l kalın, uzun ünlü kısa okunuyordu ("hikaye" → "hikaje")."""
+
+    def test_sapkasiz_alinti(self):
+        for yazim, sapkali in [("hikaye", "hikâye"), ("dükkan", "dükkân"), ("rüzgar", "rüzgâr"), ("mekan", "mekân"),
+                               ("imkan", "imkân"), ("tezgah", "tezgâh"), ("dahil", "dâhil")]:
+            self.assertEqual(g2p(yazim), g2p(sapkali), yazim)
+        self.assertEqual(g2p("hikayede"), "hicaːjede")
+        self.assertEqual(g2p("dükkanı"), "dyccanɯ")
+        self.assertEqual(g2p("herhalde"), "heɾhalde")
+
+    def test_essesli_dokunulmaz(self):
+        self.assertEqual(g2p("kar"), "kaɾ")
+        self.assertEqual(g2p("hala"), "haɫa")
+        self.assertEqual(g2p("kanun"), "kanun")
+        self.assertEqual(g2p("mekanik"), "mekanic")             # "mekan" + ek değil
+
+    def test_ince_l(self):
+        self.assertEqual(g2p("gol"), "ɡol")
+        self.assertEqual(g2p("golü"), "ɡoly")
+        self.assertEqual(g2p("petrol"), "petɾol")
+        self.assertEqual(g2p("kalbi"), "kalbi")
+        self.assertEqual(g2p("plan"), "plan")
+        self.assertEqual(g2p("kalbur"), "kaɫbuɾ")               # "kalp" yumuşaması değil
+
+
 if __name__ == "__main__":
     unittest.main()
