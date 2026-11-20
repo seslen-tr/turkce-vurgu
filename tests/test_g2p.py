@@ -47,7 +47,7 @@ class G2P(unittest.TestCase):
         self.assertEqual(g2p("metal"), "metal")
         self.assertEqual(g2p("kilometrelerce"), "cilometɾeleɾdʒe")
         self.assertEqual(g2p("gitmedik"), "ɟitmedic")         # sözlük kuralların inceliğini bozmaz
-        self.assertEqual(g2p("evladım"), "evladɯm")           # yumuşayan kök de sözlükten: ince l kalır
+        self.assertEqual(g2p("evladım"), "evlaːdɯm")          # yumuşayan kök sözlükten: ince l; TDK evla:dı
         self.assertEqual(g2p("evlat"), "evlat")
 
     def test_semboller_kapali(self):
@@ -131,6 +131,15 @@ class Sapkasiz(unittest.TestCase):
         self.assertEqual(g2p("ilanlar"), "iːlanɫaɾ")              # ünsüzle başlayan ek: kısa
         self.assertEqual(g2p("merak"), "meɾak")
         self.assertEqual(g2p("merakı"), "meɾaːkɯ")
+
+    def test_sapkali_yazim_sozluge_uyar(self):
+        # şapkasız biçim sözlükteyse şapkalı yazım ona uyar (TDK istiklal: l ince; ilan i:lan)
+        self.assertEqual(g2p("istiklâl"), g2p("istiklal"))
+        self.assertEqual(g2p("istiklâlin"), g2p("istiklalin"))
+        self.assertEqual(g2p("ilân"), "iːlan")
+        self.assertEqual(g2p("hâlâ"), "haːlaː")                   # şapka ekte: hala değil
+        self.assertEqual(g2p("kâr"), "caːɾ")                      # kar sözlükte yok: şapka kuralı
+        self.assertEqual(g2p("millî"), "milliː")
 
 
 if __name__ == "__main__":

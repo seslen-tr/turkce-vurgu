@@ -1,4 +1,4 @@
-# TDK Güncel Türkçe Sözlük telaffuzuyla düzeltilen okunuşlar (20.11.2026; sozluk.gov.tr, telaffuz alanı).
+# TDK Güncel Türkçe Sözlük telaffuzuyla düzeltilen okunuşlar (20–21.11.2026; sozluk.gov.tr, telaffuz alanı).
 # Yalnız uzunluk ve ince l/k/g, yalnız TDK'nın açıkça verdiği yerde; ğ uzatması ve ünlü-ünlü arası uzunluk
 # korunur; yalnız vurgu veren telaffuzda yalnız vurgulu hecenin uzunluğu silinir. sozluk_uret.py Vikisözlük
 # okunuşunun üstüne yazar; kurala eşit olan kayıt okunus.tsv'ye girmez.
@@ -23,37 +23,52 @@ hayali	hajaːliː	TDK haya:li:
 haymatlos	hajmatlos	TDK haymatlos: yazıldığı gibi
 hicap	hidʒap	TDK hica:bı
 hilekâr	hiːlecaɾ	TDK hi:lekâr
+hâk	haːc	TDK hâ:k
 hümayun	hymaːjun	TDK hüma:yun
 istihfaf	istihfaf	TDK istihfa:fı
 istinsah	istinsah	TDK istinsa:hı
 istisnai	istisnaːiː	TDK istisna:i:
 kazara	kazaːɾaː	TDK kaza:ra:
 kelam	celam	TDK kela:mı, l ince okunur
+klimatolog	climatoloɡ	TDK l ince okunur
+klimatoloji	climatoloʒi	TDK l ince okunur
+kolonyal	kolonjal	TDK l'ler ince okunur
+kâhin	caːhin	TDK kâ:hin
+lades	laːdes	TDK la:des, l ince okunur
 latife	latiːfe	TDK lati:fe, l ince okunur
 lider	lideɾ	TDK lider: yazıldığı gibi
 mağlubiyet	maːluːbijet	TDK mağlu:biyet, l ince okunur
 merak	meɾak	TDK mera:kı
 mezuniyet	meːzunijet	TDK me:zuniyet
 mizan	miːzaːn	TDK mi:za:n
-mübalağa	mybaːlaːa	TDK müba:lağa, l ince okunur
+muhafazakar	muhaːfazacaɾ	TDK muha:fazakâr
+muhafazakâr	muhaːfazacaɾ	TDK muha:fazakâr
 mülhiye	mylhije	TDK mülhiye: yazıldığı gibi
 mıklep	mɯklep	TDK mıklep: yazıldığı gibi
+nakdî	nacdiː	TDK nakdi:
 nefha	nefha	TDK nefha: yazıldığı gibi
 niçin	nitʃin	TDK niçin: yazıldığı gibi
 oha	oːha	TDK o:ha, o:ha:
 palyaço	paljatʃo	TDK palya'ço (yalnız vurgulu hece)
 perperişan	peɾpeɾiʃan	TDK perperişan: yazıldığı gibi
+rahîm	ɾahiːm	TDK rahi:m
 riyakâr	ɾijaːcaɾ	TDK riya:kâr
 ruzname	ɾuːznaːme	TDK ru:zna:me
 rüsva	ɾysva	TDK rüsva: yazıldığı gibi
 saha	saːha	TDK sa:ha
+tabiiyetli	tabiːijetli	TDK kök tabiiyet: tabi:iyet
 tatbikat	tatbiːkaːt	TDK tatbi:ka:t
 tedavi	tedaːviː	TDK teda:vi:
 telafi	telaːfiː	TDK tela:fi:, l ince okunur
+tesisatçı	teːsiːsattʃɯ	TDK kök tesisat: te:si:sa:tı
 teşkilat	teʃciːlat	TDK teşki:la:tı, l ince okunur
+teşkilatlar	teʃciːlatlaɾ	TDK kök teşkilat: teşki:la:tı, l ince okunur
+teşkilatı	teʃciːlaːtɯ	TDK kök teşkilat: teşki:la:tı, l ince okunur
 ucubik	udʒubic	TDK ucubik: yazıldığı gibi
 valla	vaɫɫa	TDK valla: yazıldığı gibi
 vasi	vasiː	TDK vasi:
+vasiler	vasiːleɾ	TDK kök vasi: vasi:
+vasiyi	vasiːji	TDK kök vasi: vasi:
 yahni	jahni	TDK yahni: yazıldığı gibi
 yo	jo	TDK yo: yazıldığı gibi
 şeytani	ʃejtaːniː	TDK şeyta:ni:

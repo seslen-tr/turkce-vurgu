@@ -204,8 +204,11 @@ def _ek_uzun_sozlugu() -> dict[str, str]:
     """veri/ek_uzun.tsv: ünlüyle başlayan ekte son ünlüsü uzayan kökler (TDK telaffuzu: icat → i:cat ama
     icadı → i:ca:dı; ilan → i:la:nı). 0.1.6'ya kadar ekli biçimde de kısa okunuyordu."""
     yol = Path(__file__).resolve().parent / "veri" / "ek_uzun.tsv"
-    return {} if not yol.exists() else dict(
+    eu = {} if not yol.exists() else dict(
         s.split("\t")[:2] for s in yol.read_text(encoding="utf-8").splitlines() if s and not s.startswith("#"))
+    for w in list(eu):                 # şapkasız yazım da: zekât → zekatı (şapkalı yazım şapkasıza uyar)
+        eu.setdefault(w.translate(_SAPKASIZ), eu[w])
+    return eu
 
 
 _FONEM = re.compile(r"dʒ|tʃ|[aeiɯoøuy]ː?|.")
@@ -242,11 +245,30 @@ def _yumusak_kok(p: str, oz: dict[str, str]) -> str | None:
     return taban[: -len(sert)] + yumusak + _sozcuk(p)[len(_sozcuk(y)):]
 
 
+_SAPKASIZ = str.maketrans("âîû", "aiu")
+
+
+def _sapkasiz_karsilik(p: str, oz: dict[str, str]) -> str | None:
+    """Şapkalı yazım sözlükte yoksa ve şapkasız biçimi (ya da şapkası kök içinde kalan kökü) sözlükteyse şapkasız
+    biçim: istiklâl → istiklal (iki l ince, TDK). Şapka ekteyse ya da şapkasız biçim sözlükte yoksa dokunulmaz:
+    hâlâ ≠ hala, kâr ≠ kar."""
+    if p in oz or not any(c in "âîû" for c in p):
+        return None
+    q = p.translate(_SAPKASIZ)
+    if q in oz:
+        return q
+    son_sapka = max(i for i, c in enumerate(p) if c in "âîû")
+    kok = max((r for r in oz if q.startswith(r) and len(r) > max(son_sapka, 2) and _ek_zinciri(q[len(r):])),
+              key=len, default="")
+    return q if kok else None
+
+
 def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, son: bool = False) -> str:
     """Normalleştirilmiş tek sözcük → IPA. kokler: metnin özel ad kökleri (ozel_kokler).
     Sözcük ya da kökü okunuş sözlüğündeyse (memur, metal…) kök oradan, ekler kurallarla okunur."""
     k = sozcuk_vurgusu(p, kokler, son) if vurgu else None
     oz = _okunus_sozlugu()
+    yazim, p = p, _sapkasiz_karsilik(p, oz) or p
     if p in oz:
         fonem = oz[p]
     else:
@@ -256,6 +278,6 @@ def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, 
             kok = ""                   # "sela" ⊂ "selanik": sözlükte olmayan daha uzun kök varsa kural okur
         taban = _ek_uzun_sozlugu().get(kok) if kok and p[len(kok):][:1] in UNLU else None
         fonem = (taban or oz[kok]) + _sozcuk(p)[len(_sozcuk(kok)):] if kok else _yumusak_kok(p, oz)
-    if fonem is None:
-        return _sozcuk(p, None if k is None else heceler(p)[k])
+    if fonem is None:                  # kural şapkalı yazımla okur (şapkasız karşılık sözlükte tutmadıysa)
+        return _sozcuk(yazim, None if k is None else heceler(yazim)[k])
     return fonem if k is None else _vurgu_koy(fonem, k)

@@ -52,13 +52,15 @@ zordur. Bu paket MIT lisanslıdır ve Türkçe kurallarla çalışır.
   `%12,5 → yüzde on iki virgül beş`, `1.250 km → bin iki yüz elli kilometre`.
   [turkce-normalize](https://github.com/seslen-tr/turkce-normalize) kuruluysa (`[tam]`) metin önce
   onunla hazırlanır.
-- Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.465 sözcük,
+- Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.463 sözcük,
   Vikisözlük; uzunluk ve incelik TDK telaffuzuyla düzeltilmiş): `nadir → naːdiɾ`, `malum → maːlum`,
   `metal → metal` (ince l), `kilometre → cilometɾe`. Ünlüyle başlayan ekte kökün son ünlüsü uzar
-  (TDK, 51 kök, `ek_uzun.tsv`): `icat → iːdʒat`, `icadı → iːdʒaːdɯ`, `ilanı → iːlaːnɯ`.
+  (TDK, 117 kök, `ek_uzun.tsv`): `icat → iːdʒat`, `icadı → iːdʒaːdɯ`, `ilanı → iːlaːnɯ`,
+  `ihtimali → ihtimaːli`.
 - Şapkasız yazılan alıntılar şapkalı gibi okunur: `hikaye → hicaːje`, `dükkan → dyccan`, `rüzgar → ɾyzɟaɾ`,
   `dahil → daːhil`; eşsesliler yazıldığı gibi kalır (kar / kâr, hala / hâlâ). Ek ünlüsü ince alıntıda l incedir:
-  `gol → ɡol`, `petrol → petɾol`, `kalp → kalp` (`sapka.py`).
+  `gol → ɡol`, `petrol → petɾol`, `kalp → kalp` (`sapka.py`). Şapkalı yazım, şapkasız biçimi sözlükteyse
+  ona uyar: `istiklâl → isticlal` (iki l ince), `ilân → iːlan`.
   Ekli biçimlerde kök sözlükten, ekler kurallarla okunur.
 - Noktalama korunur; modeller duraklama ve tonlamayı noktalamadan öğrenir.
 

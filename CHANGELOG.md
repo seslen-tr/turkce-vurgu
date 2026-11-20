@@ -1,5 +1,18 @@
 # Değişiklikler
 
+## 0.1.8 — TDK taramasının tamamı, şapkalı yazım
+
+- 0.1.7'de TDK sözlüğü sorgulara yanıt vermez olunca kalan kayıtlar da soruldu: türev sözcüklerin kökleri (162 kök)
+  ve uzun ünlüsü olmayan 524 kayıt. Ekte uzayan kök 51 → 117: "ihtimali" → "ihtimaːli", "iptali", "kabulü",
+  "evladım" (TDK evla:dı), "selamı", "telaşı", "ahlakı", "istiklali", "imkânı", "zekâtı", "harekâtı". Yalın
+  biçimde uzun: "kâhin" → "caːhin", "lades" → "laːdes", "hâk", "nakdî", "rahîm", "muhafazakâr" (muha:fazakâr);
+  ince l: "klimatoloji", "kolonyal", "teşkilat". Kök sorgusundan: "tesisatçı", "vasi", "tabiiyet".
+- Şapkalı yazım, şapkasız biçimi okunuş sözlüğündeyse sözlüğe uyar (önceden yalnız kuralla okunuyordu):
+  "istiklâl" → "isticlal" (önceden "isticlaːɫ": sondaki l kalın, a uzun; TDK istiklal, l ince), "ilân" → "iːlan",
+  "hâle" → "haːle". Şapka ekteyse ya da şapkasız biçim sözlükte yoksa kural okur: "hâlâ", "kâr" değişmez.
+  Ekte uzayan kök şapkalı da şapkasız da yazılsa uzar: "zekâtı" = "zekatı" → "zecaːtɯ".
+- ğ'den önceki ünlüye TDK'da olmayan uzunluk eklenmez: "mübalağa" Vikisözlük okunuşuna döndü ("mybaːlaa").
+
 ## 0.1.7 — TDK telaffuzu, ekte uzama
 
 - Okunuş sözlüğü (Vikisözlük) TDK Güncel Türkçe Sözlük'ün telaffuz bilgisiyle karşılaştırıldı: uzun ünlülü 964
