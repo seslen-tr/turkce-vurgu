@@ -113,6 +113,25 @@ class Sapkasiz(unittest.TestCase):
         self.assertEqual(g2p("plan"), "plan")
         self.assertEqual(g2p("kalbur"), "kaɫbuɾ")               # "kalp" yumuşaması değil
 
+    def test_tdk_uzunluk(self):
+        # 20.11.2026: Vikisözlük okunuşu TDK telaffuzuyla düzeltildi; vurgu işareti uzunluk sanılmıştı
+        self.assertEqual(g2p("acemice"), "adʒemidʒe")            # TDK acemi'ce (önceden adʒemiːdʒe)
+        self.assertEqual(g2p("palyaço"), "paljatʃo")             # TDK palya'ço
+        self.assertEqual(g2p("hayalî"), "hajaːliː")              # TDK haya:li:
+        self.assertEqual(g2p("eflatun"), "eflaːtun")             # TDK efla:tun, l ince
+        self.assertEqual(g2p("değerli"), "deːeɾli")              # ğ uzatması korunur
+        self.assertEqual(g2p("saniye"), "saːnije")               # TDK sa:niye, değişmedi
+
+    def test_unluyle_baslayan_ekte_uzama(self):
+        # TDK: icat i:cat, icadı i:ca:dı; ilan i:lan, ilanı i:la:nı (0.1.6'ya kadar ekli biçim kısaydı)
+        self.assertEqual(g2p("icat"), "iːdʒat")
+        self.assertEqual(g2p("icadı"), "iːdʒaːdɯ")
+        self.assertEqual(g2p("ilanı"), "iːlaːnɯ")
+        self.assertEqual(g2p("padişahı"), "paːdiʃaːhɯ")
+        self.assertEqual(g2p("ilanlar"), "iːlanɫaɾ")              # ünsüzle başlayan ek: kısa
+        self.assertEqual(g2p("merak"), "meɾak")
+        self.assertEqual(g2p("merakı"), "meɾaːkɯ")
+
 
 if __name__ == "__main__":
     unittest.main()

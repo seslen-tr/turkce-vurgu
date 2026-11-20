@@ -1,5 +1,22 @@
 # Değişiklikler
 
+## 0.1.7 — TDK telaffuzu, ekte uzama
+
+- Okunuş sözlüğü (Vikisözlük) TDK Güncel Türkçe Sözlük'ün telaffuz bilgisiyle karşılaştırıldı: uzun ünlülü 964
+  kayıttan 650'si uyumluydu; TDK'nın açıkça verdiği yerlerde 57 kayıt düzeltildi (yalnız uzunluk ve ince l/k/g;
+  öteki sesler aynı). Vikisözlük'te vurgulu hece uzun sanılmıştı: "acemice" → "adʒemidʒe" (önceden
+  "adʒemiːdʒe"; TDK "acemi'ce"), "palyaço", "aterina" (yalnız vurgu veren telaffuzda yalnız vurgulu hecenin
+  uzunluğu silinir: "memnuniyetle"de kökün uzunluğu, memnu:niyet, kalır); kalın okunan ince l:
+  "eflatun" → "eflaːtun", "latife", "gilaburu"; sondaki uzun î: "hayalî", "hakiki", "tedavi", "telafi",
+  "istisnai", "şeytanî"; TDK'ya göre yazıldığı gibi okunanlar: "lider", "şut", "niçin", "ezan", "yahni". ğ
+  uzatması (değer → deːeɾ) ve ünlü-ünlü arasındaki uzunluk korunur: "cezaevi"nde TDK yalnız vurgu veriyor ama ː
+  silinince model iki ünlüyü kaynaştırıyordu ("cezavi"). Düzeltmeler `degerlendirme/tdk_okunus.tsv`'de;
+  `sozluk_uret.py` Vikisözlük okunuşunun üstüne yazar.
+- Ünlüyle başlayan ekte kökün son ünlüsü uzar (TDK: icat "i:cat", icadı "i:ca:dı"): "icadı" → "iːdʒaːdɯ"
+  (önceden "iːdʒadɯ"), "ilanı", "padişahı", "merakı", "mirası", "itibarı", "azabı"; 51 kök (`veri/ek_uzun.tsv`).
+  Ünsüzle başlayan ekte kısa kalır ("ilanlar"). Yalın biçimde TDK'nın kısa verdiği son ünlü kısaldı: "merak" →
+  "meɾak", "azap", "hicap".
+
 ## 0.1.6 — şapkasız alıntı, ince l
 
 - Şapkasız yazılan alıntı sözcük şapkalı gibi okunur: "hikaye" → "hicaːje" (önceden "hikaje"), "dükkan" →

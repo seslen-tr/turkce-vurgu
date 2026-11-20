@@ -1,14 +1,14 @@
 # Vikisözlük (kaikki.org) sesbirimsel IPA, CC BY-SA 4.0 — yazımda görünmeyen uzun ünlü ve ince l/k/g
+# 0.1.7: uzunluk ve ince l/k/g, TDK telaffuzunun açıkça verdiği yerlerde düzeltildi (tdk_okunus.tsv)
 # sözcük<TAB>okunuş (vurgusuz, turkce_vurgu sembolleriyle)
 abacılar	abadʒɯlaɾ
 abajurcular	abaʒuɾdʒulaɾ
-abat	aːbat
+abat	aːbaːt
 abece	aːbeːdʒeː
 abi	aːbi
 abide	aːbide
 abideleştirmek	aːbideleʃtiɾmec
 acaba	adʒabaː
-acemice	adʒemiːdʒe
 acilen	aːdʒilen
 acıklı	adʒɯklɯ
 adalet	adaːlet
@@ -63,8 +63,8 @@ aleykümselam	alejcymselam
 alfa	alfa
 alfabe	alfabe
 algısal	aɫɡɯsal
-alicenap	aːlidʒenap
-alicenaplık	aːlidʒenapɫɯk
+alicenap	aːliːdʒenap
+alicenaplık	aːliːdʒenapɫɯk
 alkol	alkol
 alkolik	alkolic
 allame	allaːme
@@ -77,7 +77,7 @@ alyan	aljan
 alyans	aljans
 alüminyumlar	alyminjumlaɾ
 alşimist	alʃimist
-amal	aːmal
+amal	aːmaːl
 ambalaj	ambalaʒ
 ambülans	ambylans
 amentü	aːmenty
@@ -108,7 +108,6 @@ aslında	aslɯnda
 astrolog	astɾoloɡ
 asuman	aːsuman
 atalar	atalaɾ
-aterina	ateɾiːna
 atlambaç	atlambatʃ
 atılgan	atɯlɡan
 avantajlar	avantaʒlaɾ
@@ -116,8 +115,7 @@ avcılık	avdʒɯlɯk
 ayal	ajal
 ayet	aːjet
 azalmak	azalmak
-azami	aːzaːmiː
-azap	aːzap
+azami	aːzamiː
 azat	aːzat
 ağartı	aːaɾtɯ
 ağızdan	aːɯzdan
@@ -197,7 +195,7 @@ cahilce	dʒaːhildʒe
 cahilleşmek	dʒaːhilleʃmec
 cahillik	dʒaːhillic
 canan	dʒaːnan
-cansiparane	dʒansipaɾaːne
+cansiparane	dʒansipaːɾaːne
 cari	dʒaːɾiː
 casus	dʒaːsus
 cazibe	dʒaːzibe
@@ -289,7 +287,7 @@ ebedileştirmek	ebediːleʃtiɾmec
 eczacı	edʒzaːdʒɯ
 eczane	edʒzaːne
 efkârlanmak	efcaɾɫanmak
-eflatun	efɫaːtun
+eflatun	eflaːtun
 efsane	efsaːne
 ejderha	eʒdeɾhaː
 ekalliyet	ekallijet
@@ -303,11 +301,9 @@ elifbe	elifbeː
 emaneten	emaːneten
 empermeabl	empeɾmeabl
 emrivaki	emɾivaːciː
-emtia	emtiaː
 enaniyet	enaːnijet
 enayi	enaːji
 enfüsi	enfysiː
-engerek	enɟeɾeːc
 enjeksiyonlar	enʒecsijonlaɾ
 enjeksiyonları	enʒecsijonlaɾɯ
 entari	entaːɾi
@@ -320,7 +316,6 @@ evlatlık	evlatɫɯk
 evliya	evlijaː
 evvela	evvelaː
 eyalet	ejaːlet
-ezan	ezaːn
 ezkaza	ezkazaː
 eşantiyonlar	eʃantijonlaɾ
 eşkâl	eʃcal
@@ -374,8 +369,7 @@ gazi	ɡaːzi
 geda	ɟedaː
 general	ɟeneɾal
 gereğince	ɟeɾeːindʒe
-gidişat	ɟidiʃaːt
-gilaburu	ɟiɫaːbuɾu
+gilaburu	ɟilaːbuɾu
 glikoz	ɟlikoz
 grip	ɟɾip
 gulli	ɡulli
@@ -397,7 +391,7 @@ hakaret	hakaːɾet
 haki	haːciː
 hakikat	haciːkat
 hakikaten	haciːkaten
-hakiki	haciːci
+hakiki	haciːciː
 hakimiyet	haːcimijet
 haklı	haklɯ
 hal	hal
@@ -434,13 +428,13 @@ havai	havaːiː
 havale	havaːle
 havari	havaːɾiː
 hayal	hajal
-hayali	hajaːli
+hayali	hajaːliː
 hayalperest	hajalpeɾest
 hayalî	hajaːliː
 hayatı	hajaːtɯ
 hayatım	hajaːtɯm
 haylaz	hajlaz
-haymatlos	hajmatloːs
+haymatlos	hajmatlos
 hazine	haziːne
 haşa	haːʃaː
 haşhaşhane	haʃhaʃhaːne
@@ -451,7 +445,6 @@ hercai	heɾdʒaːiː
 herhâlde	heɾhalde
 hezimet	heziːmet
 hezimetler	heziːmetleɾ
-hicap	hidʒaːp
 hidayet	hidaːjet
 hidayeti	hidaːjeti
 hidayetler	hidaːjetleɾ
@@ -460,7 +453,7 @@ hilal	hilal
 hile	hiːle
 hilebaz	hiːlebaz
 hileci	hiːledʒi
-hilekâr	hiːlecaːɾ
+hilekâr	hiːlecaɾ
 hileler	hiːleleɾ
 hileli	hiːleli
 himaye	himaːje
@@ -480,7 +473,7 @@ hâllice	hallidʒe
 hücrevi	hydʒɾeviː
 hülasa	hylaːsa
 hülya	hyljaː
-hümayun	hymaːjuːn
+hümayun	hymaːjun
 hünsa	hynsaː
 hıyanet	hɯjaːnet
 iade	iaːde
@@ -569,7 +562,6 @@ istidlal	istidlal
 istifade	istifaːde
 istifra	istifɾaː
 istihale	istihaːle
-istihfaf	istihfaːf
 istihkâm	istihcam
 istihsal	istihsal
 istihza	istihzaː
@@ -580,9 +572,8 @@ istimlak	istimlac
 istimna	istimnaː
 istinaden	istinaːden
 istinatgâh	istinatɟah
-istinsah	istinsaːh
 istisna	istisnaː
-istisnai	istisnaːi
+istisnai	istisnaːiː
 istisnasız	istisnaːsɯz
 istiva	istivaː
 istiğna	istiːnaː
@@ -657,13 +648,13 @@ kategoriyi	cateɡoɾiji
 kaynaklamaz	cajnaclamaz
 kaynaklar	cajnaclaɾ
 kazaen	kazaːen
-kazara	kazaːɾa
+kazara	kazaːɾaː
 kaçınılmaz	katʃɯnɯlmaz
 kağıt	caɯt
 kaşkol	kaʃkol
 kefal	cefal
 kefaret	cefaːɾet
-kelam	celaːm
+kelam	celam
 kelamı	celaːmɯ
 kelle	cellːe
 kemane	cemaːne
@@ -775,7 +766,7 @@ lanse	lanse
 lansman	lansman
 lapislazuli	lapislazuli
 lata	lata
-latife	ɫatiːfe
+latife	latiːfe
 laubali	laːubaːliː
 lavabo	lavabo
 lavman	lavman
@@ -785,7 +776,6 @@ lazım	laːzɯm
 lağım	laɯm
 legal	leɡal
 letafet	letaːfet
-lider	liːdeɾ
 liralar	liɾalaɾ
 lisanlar	lisanlaɾ
 lisanı	lisaːnɯ
@@ -844,7 +834,7 @@ maviş	maːviʃ
 mazeret	maːzeɾet
 mazlum	mazlum
 mazur	maːzuɾ
-mağlubiyet	maːlubijet
+mağlubiyet	maːluːbijet
 mağlup	maːlup
 meblağ	meblaː
 mecal	medʒal
@@ -862,7 +852,6 @@ memnuniyeti	memnuːnijeti
 memnuniyetle	memnuːnijetle
 memnuniyetler	memnuːnijetleɾ
 menşe	menʃeː
-merak	meɾaːk
 merasim	meɾaːsim
 merdane	meɾdaːne
 merdanelemek	meɾdaːnelemec
@@ -892,7 +881,7 @@ mezra	mezɾaː
 mezralar	mezɾaːlaɾ
 mezrayı	mezɾaːjɯ
 mezun	meːzun
-mezuniyet	meːzuːnijet
+mezuniyet	meːzunijet
 meçhul	metʃhul
 meşgul	meʃɡul
 meşkûr	meʃcuɾ
@@ -914,7 +903,7 @@ misafirhane	misaːfiɾhaːne
 misafirperver	misaːfiɾpeɾveɾ
 misafirperverlik	misaːfiɾpeɾveɾlic
 mitralyöz	mitɾaljøz
-mizan	miːzan
+mizan	miːzaːn
 moral	moɾal
 muafiyet	muaːfijet
 muallime	muallime
@@ -949,7 +938,7 @@ muğlak	muːlak
 muğlaklık	muːlakɫɯk
 mübadele	mybaːdele
 mübahase	mybaːhase
-mübalağa	mybaːlaa
+mübalağa	mybaːlaːa
 mübalağalı	mybaːlaːaɫɯ
 mübarek	mybaːɾec
 mücadele	mydʒaːdele
@@ -959,7 +948,6 @@ müdahil	mydaːhil
 müdavim	mydaːvim
 mülahham	mylahham
 mülakat	mylaːkat
-mülhiye	mylhijeː
 mümasil	mymaːsil
 mümin	myːmin
 münakasa	mynaːkasa
@@ -988,7 +976,6 @@ müzayede	myzaːjede
 müşabih	myʃaːbih
 müşavere	myʃaːveɾe
 müşteki	myʃteciː
-mıklep	mɯkleːp
 nadim	naːdim
 nadir	naːdiɾ
 nahiye	naːhije
@@ -1021,7 +1008,6 @@ nebatat	nebaːtat
 nebi	nebiː
 nedamet	nedaːmet
 nedime	nediːme
-nefha	nefhaː
 netice	netiːdʒe
 neticede	netiːdʒede
 neticelenmek	netiːdʒelenmec
@@ -1033,7 +1019,6 @@ nikâh	nicah
 nimet	niːmet
 nispi	nispiː
 nizamı	nizaːmɯ
-niçin	niːtʃin
 nişane	niʃaːne
 noldu	noːɫdu
 nolur	noːɫuɾ
@@ -1048,7 +1033,7 @@ numaralamayı	numaɾalamajɯ
 numune	numuːne
 nörüyon	nøːɾyjon
 nümayiş	nymaːjiʃ
-oha	oːhaː
+oha	oːha
 oktrol	oktɾol
 okumalar	okumalaɾ
 ol	ol
@@ -1058,7 +1043,7 @@ orijinal	oɾiʒinal
 oryantal	oɾjantal
 padişah	paːdiʃah
 palyatif	paljatif
-palyaço	paljaːtʃo
+palyaço	paljatʃo
 papatyalar	papatjalaɾ
 paraçol	paɾatʃol
 pare	paːɾe
@@ -1068,7 +1053,6 @@ perhizkâr	peɾhizcaɾ
 perişan	peɾiːʃan
 permütasyonlar	peɾmytasjonlaɾ
 permütasyonlu	peɾmytasjonlu
-perperişan	peɾpeɾiːʃan
 peyda	pejdaː
 peynirhane	pejniɾhaːne
 pilaki	pilaːci
@@ -1116,16 +1100,15 @@ rica	ɾidʒaː
 risale	ɾisaːle
 rivayet	ɾivaːjet
 riya	ɾijaː
-riyakâr	ɾijaːcaːɾ
+riyakâr	ɾijaːcaɾ
 riyaset	ɾijaːset
 riyaziye	ɾijaːzije
 rol	ɾol
 ruhani	ɾuːhaːniː
 ruhen	ɾuːhen
-ruzname	ɾuznaːme
+ruzname	ɾuːznaːme
 rölanti	ɾølanti
 rölatif	ɾølatif
-rüsva	ɾysvaː
 rüya	ɾyjaː
 rüyalanmak	ɾyjaːɫanmak
 rüzgâr	ɾyzɟaɾ
@@ -1140,7 +1123,7 @@ sadeleştirmek	saːdeleʃtiɾmec
 sadık	saːdɯk
 safa	safaː
 safi	saːfiː
-saha	saːhaː
+saha	saːha
 sahi	saːhi
 sahibe	saːhibe
 sahiden	saːhiden
@@ -1274,7 +1257,7 @@ tarih	taːɾih
 tarihen	taːɾihen
 tarihî	taːɾihiː
 tasvirî	tasviːɾiː
-tatbikat	tatbiːkat
+tatbikat	tatbiːkaːt
 tatbikim	tatbiːcim
 tatil	taːtil
 tatlar	tatlaɾ
@@ -1286,7 +1269,7 @@ tecavüz	tedʒaːvyz
 tecavüzcü	tedʒaːvyzdʒy
 tecridim	tedʒɾiːdim
 tedarik	tedaːɾic
-tedavi	tedaːvi
+tedavi	tedaːviː
 tedip	teːdip
 tedricen	tedɾiːdʒen
 tedricî	tedɾiːdʒiː
@@ -1296,7 +1279,7 @@ teknoloji	tecnoloʒi
 tekrarım	tecɾaːɾɯm
 tela	tela
 telaffuz	telaffuz
-telafi	telaːfi
+telafi	telaːfiː
 telaş	telaʃ
 tellal	tellaɫ
 temayül	temaːjyl
@@ -1323,7 +1306,7 @@ tevazu	tevaːzuː
 tevsi	tevsiː
 tezgâh	tezɟah
 tezlil	tezliːl
-teşkilat	teʃciːlaːt
+teşkilat	teʃciːlat
 teşkilatlar	teʃciːɫaːtlaɾ
 teşkilatı	teʃciːɫaːtɯ
 ticaret	tidʒaːɾet
@@ -1347,7 +1330,6 @@ tuzlamaz	tuzlamaz
 tuzlar	tuzlaɾ
 tıbbi	tɯbbiː
 ucube	udʒuːbe
-ucubik	udʒuːbic
 ufki	ufciː
 uhrevi	uhɾeviː
 ukala	ukalaː
@@ -1371,9 +1353,8 @@ vahşice	vahʃiːdʒe
 vahşiyane	vahʃijaːne
 valf	valf
 vali	vaːli
-valla	vaɫɫaː
 vantilatör	vantilatøɾ
-vasi	vaːsiː
+vasi	vasiː
 vasiler	vaːsiːleɾ
 vasiyi	vaːsiːji
 vasıta	vaːsɯta
@@ -1398,7 +1379,6 @@ vilayet	vilaːjet
 viral	viɾal
 viran	viːɾan
 virane	viːɾaːne
-yahni	jaːhni
 yahu	jaːhu
 yakinen	jaciːnen
 yalancı	jalandʒɯ
@@ -1415,7 +1395,6 @@ yekpare	jecpaːɾe
 yelpazekuyruk	jelpaːzekujɾuk
 yemekhane	jemechaːne
 yenidünya	jenidynjaː
-yo	joː
 yumurtalar	jumuɾtalaɾ
 yumuşaklar	jumuʃaklaɾ
 yumuşakçalar	jumuʃaktʃalaɾ
@@ -1476,15 +1455,14 @@ zırcahil	zɯɾdʒaːhil
 şehzade	ʃehzaːde
 şekva	ʃecvaː
 şematet	ʃemaːtet
-şeytani	ʃejtaːni
-şeytanî	ʃejtaːni
+şeytani	ʃejtaːniː
+şeytanî	ʃejtaːniː
 şifa	ʃifaː
 şifalı	ʃifaːɫɯ
 şikârlar	ʃicaːɾlaɾ
 şikâyetname	ʃicaːjetnaːme
 şube	ʃuːbe
 şule	ʃuːle
-şut	ʃuːt
 şuurlu	ʃuːuɾɫu
 şövalye	ʃøvalje
-şûra	ʃuːɾaː
+şûra	ʃuɾaː

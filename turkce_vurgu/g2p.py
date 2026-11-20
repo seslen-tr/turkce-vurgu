@@ -13,7 +13,8 @@ Türkçe yazıldığı gibi okunur; birkaç kural yeter:
     iki ünlü arasında düşer (ağaç → aatʃ).
   - Sayılar, yüzde, birkaç kısaltma sözcüğe açılır (sayi.py).
   - Yazımda görünmeyen uzun ünlü ve ince l/k/g okunuş sözlüğünden (veri/okunus.tsv,
-    Vikisözlük): memur → meːmuɾ, metal → metal, kilometre → cilometɾe.
+    Vikisözlük; TDK telaffuzuyla düzeltilmiş): memur → meːmuɾ, metal → metal, kilometre → cilometɾe.
+    Ünlüyle başlayan ekte uzayan kökler veri/ek_uzun.tsv'de (TDK): icat → iːdʒat, icadı → iːdʒaːdɯ.
 Noktalama korunur (, . ! ? ; : …): öğrenci duraklamayı ve tonlamayı ondan öğrenir.
 vurgu=True: vurgulu hecenin önüne ˈ (vurgu.py; özel adlar büyük harf ve kesme
 işaretinden, normalleştirmeden ÖNCE bulunur).
@@ -193,7 +194,18 @@ def _okunus_sozlugu() -> dict[str, str]:
         s.split("\t") for s in yol.read_text(encoding="utf-8").splitlines() if s and not s.startswith("#"))
     for w, ipa in ek_okunuslar(_sozluk()["kokler"], _sozcuk, oz).items():
         oz.setdefault(w, ipa)
+    for w in _ek_uzun_sozlugu():       # ekte uzayan kök (merak → merakı) yalın okunuşu kurala eşit olsa da kök
+        oz.setdefault(w, _sozcuk(w))
     return oz
+
+
+@lru_cache(maxsize=1)
+def _ek_uzun_sozlugu() -> dict[str, str]:
+    """veri/ek_uzun.tsv: ünlüyle başlayan ekte son ünlüsü uzayan kökler (TDK telaffuzu: icat → i:cat ama
+    icadı → i:ca:dı; ilan → i:la:nı). 0.1.6'ya kadar ekli biçimde de kısa okunuyordu."""
+    yol = Path(__file__).resolve().parent / "veri" / "ek_uzun.tsv"
+    return {} if not yol.exists() else dict(
+        s.split("\t")[:2] for s in yol.read_text(encoding="utf-8").splitlines() if s and not s.startswith("#"))
 
 
 _FONEM = re.compile(r"dʒ|tʃ|[aeiɯoøuy]ː?|.")
@@ -224,9 +236,10 @@ def _yumusak_kok(p: str, oz: dict[str, str]) -> str | None:
     if not y or _daha_uzun_kok(p, y, _sozluk()["kokler"], _sozluk()["ozel"]):
         return None                    # "kalbur" ⊄ "kalp": sözlükte daha uzun kök varsa yumuşama değil
     _, sert, yumusak = _YUMUSAMA[r[-1]]
-    if not oz[r].endswith(sert):
+    taban = _ek_uzun_sozlugu().get(r, oz[r])           # yumuşama hep ünlüyle başlayan ekte: icat → icadı
+    if not taban.endswith(sert):
         return None
-    return oz[r][: -len(sert)] + yumusak + _sozcuk(p)[len(_sozcuk(y)):]
+    return taban[: -len(sert)] + yumusak + _sozcuk(p)[len(_sozcuk(y)):]
 
 
 def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, son: bool = False) -> str:
@@ -241,7 +254,8 @@ def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, 
                   key=len, default="")
         if kok and _daha_uzun_kok(p, kok, _sozluk()["kokler"], _sozluk()["ozel"]):
             kok = ""                   # "sela" ⊂ "selanik": sözlükte olmayan daha uzun kök varsa kural okur
-        fonem = oz[kok] + _sozcuk(p)[len(_sozcuk(kok)):] if kok else _yumusak_kok(p, oz)
+        taban = _ek_uzun_sozlugu().get(kok) if kok and p[len(kok):][:1] in UNLU else None
+        fonem = (taban or oz[kok]) + _sozcuk(p)[len(_sozcuk(kok)):] if kok else _yumusak_kok(p, oz)
     if fonem is None:
         return _sozcuk(p, None if k is None else heceler(p)[k])
     return fonem if k is None else _vurgu_koy(fonem, k)

@@ -52,8 +52,10 @@ zordur. Bu paket MIT lisanslıdır ve Türkçe kurallarla çalışır.
   `%12,5 → yüzde on iki virgül beş`, `1.250 km → bin iki yüz elli kilometre`.
   [turkce-normalize](https://github.com/seslen-tr/turkce-normalize) kuruluysa (`[tam]`) metin önce
   onunla hazırlanır.
-- Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.488 sözcük,
-  Vikisözlük): `nadir → naːdiɾ`, `malum → maːlum`, `metal → metal` (ince l), `kilometre → cilometɾe`.
+- Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.465 sözcük,
+  Vikisözlük; uzunluk ve incelik TDK telaffuzuyla düzeltilmiş): `nadir → naːdiɾ`, `malum → maːlum`,
+  `metal → metal` (ince l), `kilometre → cilometɾe`. Ünlüyle başlayan ekte kökün son ünlüsü uzar
+  (TDK, 51 kök, `ek_uzun.tsv`): `icat → iːdʒat`, `icadı → iːdʒaːdɯ`, `ilanı → iːlaːnɯ`.
 - Şapkasız yazılan alıntılar şapkalı gibi okunur: `hikaye → hicaːje`, `dükkan → dyccan`, `rüzgar → ɾyzɟaɾ`,
   `dahil → daːhil`; eşsesliler yazıldığı gibi kalır (kar / kâr, hala / hâlâ). Ek ünlüsü ince alıntıda l incedir:
   `gol → ɡol`, `petrol → petɾol`, `kalp → kalp` (`sapka.py`).
@@ -190,4 +192,6 @@ in the sister project `turkce-plbert`.
 ## Lisans
 
 Kod MIT, bkz. [LICENSE](LICENSE). `turkce_vurgu/veri/` altındaki sözlük dosyaları
-Vikisözlük'ten türetildiği için **CC BY-SA 4.0**'tır (`degerlendirme/sozluk_uret.py` üretir).
+Vikisözlük'ten türetildiği için **CC BY-SA 4.0**'tır (`degerlendirme/sozluk_uret.py` üretir). Okunuşlardaki
+uzunluk ve incelik düzeltmeleri TDK Güncel Türkçe Sözlük'ün telaffuz bilgisine dayanır
+(`degerlendirme/tdk_okunus.tsv`, `veri/ek_uzun.tsv`).

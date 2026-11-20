@@ -1,0 +1,62 @@
+# TDK Güncel Türkçe Sözlük telaffuzuyla düzeltilen okunuşlar (20.11.2026; sozluk.gov.tr, telaffuz alanı).
+# Yalnız uzunluk ve ince l/k/g, yalnız TDK'nın açıkça verdiği yerde; ğ uzatması ve ünlü-ünlü arası uzunluk
+# korunur; yalnız vurgu veren telaffuzda yalnız vurgulu hecenin uzunluğu silinir. sozluk_uret.py Vikisözlük
+# okunuşunun üstüne yazar; kurala eşit olan kayıt okunus.tsv'ye girmez.
+# sözcük<TAB>okunuş<TAB>TDK
+abat	aːbaːt	TDK a:ba:t
+acemice	adʒemidʒe	TDK acemi'ce (yalnız vurgulu hece)
+alicenap	aːliːdʒenap	TDK a:li:cenap
+alicenaplık	aːliːdʒenapɫɯk	TDK kök alicenap: a:li:cenap
+amal	aːmaːl	TDK a:ma:l
+aterina	ateɾina	TDK ateri'na (yalnız vurgulu hece)
+azami	aːzamiː	TDK a:zami:
+azap	azap	TDK aza:bı
+cansiparane	dʒansipaːɾaːne	TDK cansipa:ra:ne
+eflatun	eflaːtun	TDK efla:tun, l ince okunur
+emtia	emtia	TDK emtia: yazıldığı gibi
+engerek	enɟeɾec	TDK engerek: yazıldığı gibi
+ezan	ezan	TDK ezan: yazıldığı gibi
+gidişat	ɟidiʃat	TDK gidişa:tı
+gilaburu	ɟilaːbuɾu	TDK l ince okunur
+hakiki	haciːciː	TDK haki:ki:
+hayali	hajaːliː	TDK haya:li:
+haymatlos	hajmatlos	TDK haymatlos: yazıldığı gibi
+hicap	hidʒap	TDK hica:bı
+hilekâr	hiːlecaɾ	TDK hi:lekâr
+hümayun	hymaːjun	TDK hüma:yun
+istihfaf	istihfaf	TDK istihfa:fı
+istinsah	istinsah	TDK istinsa:hı
+istisnai	istisnaːiː	TDK istisna:i:
+kazara	kazaːɾaː	TDK kaza:ra:
+kelam	celam	TDK kela:mı, l ince okunur
+latife	latiːfe	TDK lati:fe, l ince okunur
+lider	lideɾ	TDK lider: yazıldığı gibi
+mağlubiyet	maːluːbijet	TDK mağlu:biyet, l ince okunur
+merak	meɾak	TDK mera:kı
+mezuniyet	meːzunijet	TDK me:zuniyet
+mizan	miːzaːn	TDK mi:za:n
+mübalağa	mybaːlaːa	TDK müba:lağa, l ince okunur
+mülhiye	mylhije	TDK mülhiye: yazıldığı gibi
+mıklep	mɯklep	TDK mıklep: yazıldığı gibi
+nefha	nefha	TDK nefha: yazıldığı gibi
+niçin	nitʃin	TDK niçin: yazıldığı gibi
+oha	oːha	TDK o:ha, o:ha:
+palyaço	paljatʃo	TDK palya'ço (yalnız vurgulu hece)
+perperişan	peɾpeɾiʃan	TDK perperişan: yazıldığı gibi
+riyakâr	ɾijaːcaɾ	TDK riya:kâr
+ruzname	ɾuːznaːme	TDK ru:zna:me
+rüsva	ɾysva	TDK rüsva: yazıldığı gibi
+saha	saːha	TDK sa:ha
+tatbikat	tatbiːkaːt	TDK tatbi:ka:t
+tedavi	tedaːviː	TDK teda:vi:
+telafi	telaːfiː	TDK tela:fi:, l ince okunur
+teşkilat	teʃciːlat	TDK teşki:la:tı, l ince okunur
+ucubik	udʒubic	TDK ucubik: yazıldığı gibi
+valla	vaɫɫa	TDK valla: yazıldığı gibi
+vasi	vasiː	TDK vasi:
+yahni	jahni	TDK yahni: yazıldığı gibi
+yo	jo	TDK yo: yazıldığı gibi
+şeytani	ʃejtaːniː	TDK şeyta:ni:
+şeytanî	ʃejtaːniː	TDK şeyta:ni:
+şut	ʃut	TDK şut: yazıldığı gibi
+şûra	ʃuɾaː	TDK şu'ra (yalnız vurgulu hece)

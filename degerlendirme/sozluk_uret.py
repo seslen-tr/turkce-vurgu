@@ -91,8 +91,16 @@ def main() -> int:
                                     encoding="utf-8")
     print(f"istisna {len(istisna)}, kişi adı {len(adlar)}, kök {len(kokler)}, eylem {len(fiiller)}, özel ad {len(ozel)}")
     okunus = okunus_sozlugu()
+    from turkce_vurgu.g2p import _sozcuk
+    for s in (Path(__file__).parent / "tdk_okunus.tsv").read_text(encoding="utf-8").splitlines():
+        if s and not s.startswith("#"):             # TDK düzeltmeleri (0.1.7); kurala eşitse istisna değildir
+            w, o = s.split("\t")[:2]
+            okunus[w] = o
+            if o == _sozcuk(w):
+                del okunus[w]
     (HEDEF / "okunus.tsv").write_text(
         "# Vikisözlük (kaikki.org) sesbirimsel IPA, CC BY-SA 4.0 — yazımda görünmeyen uzun ünlü ve ince l/k/g\n"
+        "# 0.1.7: uzunluk ve ince l/k/g, TDK telaffuzunun açıkça verdiği yerlerde düzeltildi (tdk_okunus.tsv)\n"
         "# sözcük<TAB>okunuş (vurgusuz, turkce_vurgu sembolleriyle)\n"
         + "\n".join(f"{k}\t{v}" for k, v in sorted(okunus.items())) + "\n", encoding="utf-8")
     print(f"okunuş istisnası {len(okunus)}")
