@@ -52,7 +52,7 @@ zordur. Bu paket MIT lisanslıdır ve Türkçe kurallarla çalışır.
   `%12,5 → yüzde on iki virgül beş`, `1.250 km → bin iki yüz elli kilometre`.
   [turkce-normalize](https://github.com/seslen-tr/turkce-normalize) kuruluysa (`[tam]`) metin önce
   onunla hazırlanır.
-- Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.463 sözcük,
+- Yazımda görünmeyen uzun ünlüler ve kural dışı ince l/k/g için okunuş sözlüğü (1.473 sözcük,
   Vikisözlük; uzunluk ve incelik TDK telaffuzuyla düzeltilmiş): `nadir → naːdiɾ`, `malum → maːlum`,
   `metal → metal` (ince l), `kilometre → cilometɾe`. Ünlüyle başlayan ekte kökün son ünlüsü uzar
   (TDK, 117 kök, `ek_uzun.tsv`): `icat → iːdʒat`, `icadı → iːdʒaːdɯ`, `ilanı → iːlaːnɯ`,

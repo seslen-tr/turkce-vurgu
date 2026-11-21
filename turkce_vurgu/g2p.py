@@ -173,8 +173,30 @@ def g2p(metin: str, vurgu: bool = False) -> str:
             out = out.rstrip() + p + " "
             continue
         son = i + 1 == len(parca) or parca[i + 1] in NOKTALAMA        # cümle / yan cümle sonu (olumsuz emir)
-        out += sozcuk_okunusu(p, kokler, vurgu, son) + " "
+        iyelik = p in _IYELIK_ESSESLI and _iyelik_mi(parca, i)
+        out += sozcuk_okunusu(p, kokler, vurgu, son, iyelik) + " "
     return out.strip()
+
+
+# Şapkasız yazımı nisbet sıfatıyla (î) aynı düşen iyelik / belirtme hali: hayal + i = "hayali", sıfat "hayalî"
+# (TDK sıfatı şapkalı yazar). Ünlü uyumu öteki sözlük sıfatlarında çakışmayı önler (mal → malı ≠ mali).
+_IYELIK_ESSESLI = {"hayali"}
+_BIR_KALIP = {"türlü", "daha", "kez", "kere", "an", "gün"}
+_ILGI = re.compile(r"(?:n[ıiuü]n|benim|senin|bizim|sizin)$")
+
+
+def _iyelik_mi(parca: list[str], i: int) -> bool:
+    """Şapkasız eşsesli iyelik / belirtme hali mi: önünde (aynı yan cümlede, 3 sözcük içinde) ilgi hali varsa evet;
+    yoksa ardından "bir" geliyorsa sıfattır ("hayali bir hikâye"), gelmiyorsa iyelik ("çocukluk hayali")."""
+    once = []
+    for x in reversed(parca[max(0, i - 3):i]):
+        if x in NOKTALAMA:
+            break
+        once.append(x)
+    if any(len(x) >= 4 and _ILGI.search(x) for x in once):
+        return True
+    bir = i + 1 < len(parca) and parca[i + 1] == "bir"
+    return not bir or (i + 2 < len(parca) and parca[i + 2] in _BIR_KALIP)   # "bu hayali bir türlü unutamadı"
 
 
 def sozcuk_vurgusu(p: str, kokler: set[str] = frozenset(), son: bool = False) -> int | None:
@@ -263,13 +285,18 @@ def _sapkasiz_karsilik(p: str, oz: dict[str, str]) -> str | None:
     return q if kok else None
 
 
-def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, son: bool = False) -> str:
+def sozcuk_okunusu(p: str, kokler: set[str] = frozenset(), vurgu: bool = False, son: bool = False,
+                   iyelik: bool = False) -> str:
     """Normalleştirilmiş tek sözcük → IPA. kokler: metnin özel ad kökleri (ozel_kokler).
-    Sözcük ya da kökü okunuş sözlüğündeyse (memur, metal…) kök oradan, ekler kurallarla okunur."""
+    Sözcük ya da kökü okunuş sözlüğündeyse (memur, metal…) kök oradan, ekler kurallarla okunur.
+    iyelik: eşsesli (hayali) kök + iyelik / belirtme eki okunur (g2p bağlamdan karar verir)."""
     k = sozcuk_vurgusu(p, kokler, son) if vurgu else None
     oz = _okunus_sozlugu()
     yazim, p = p, _sapkasiz_karsilik(p, oz) or p
-    if p in oz:
+    if iyelik and p in _IYELIK_ESSESLI:
+        r = p[:-1]
+        fonem = _ek_uzun_sozlugu().get(r, oz[r]) + _sozcuk(p)[len(_sozcuk(r)):]
+    elif p in oz:
         fonem = oz[p]
     else:
         kok = max((r for r in oz if p.startswith(r) and len(r) >= 3 and not r.endswith("ğ") and _ek_zinciri(p[len(r):])),

@@ -1,5 +1,15 @@
 # Değişiklikler
 
+## 0.1.9 — türevler, hayali
+
+- Kökü okunuş sözlüğünde olup kendisi ayrı sözcük olan (bu yüzden kökün okunuşunu almayan) türevler TDK'da
+  soruldu, 10 kayıt eklendi: "ahlaki" → "ahlaːciː" (önceden "ahɫaci": l kalın, uzunluk yok; TDK ahla:ki:, l ince),
+  "adilane", "hayalet", "kefalet", "mealen", "meşguliyet", "ihtimalî", "alkolizm", "alkolölçer", "kolonyalizm".
+- Şapkasız "hayali": iyelik / belirtme hali (hayal + i, son i kısa) ile sıfat "hayalî" (son î uzun) aynı yazılır.
+  Önünde aynı yan cümlede ilgi hali varsa ya da ardından "bir" gelmiyorsa iyelik: "onun en büyük hayali bir ev
+  almaktı", "çocukluk hayali", "bu hayali bir türlü unutamadı"; yoksa sıfat: "hayali bir hikâye". Şapkalı
+  "hayalî" hep sıfat. Ünlü uyumu öteki sözlük sıfatlarında çakışmayı önler (mal → malı ≠ mali).
+
 ## 0.1.8 — TDK taramasının tamamı, şapkalı yazım
 
 - 0.1.7'de TDK sözlüğü sorgulara yanıt vermez olunca kalan kayıtlar da soruldu: türev sözcüklerin kökleri (162 kök)

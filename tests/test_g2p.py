@@ -141,6 +141,19 @@ class Sapkasiz(unittest.TestCase):
         self.assertEqual(g2p("kâr"), "caːɾ")                      # kar sözlükte yok: şapka kuralı
         self.assertEqual(g2p("millî"), "milliː")
 
+    def test_kurala_dusen_turev_tdk(self):
+        # kökü sözlükte, kendisi ayrı sözcük olan türevler (0.1.9, TDK): ahlaki ahla:ki:, l ince
+        self.assertEqual(g2p("ahlaki"), "ahlaːciː")
+        self.assertEqual(g2p("hayalet"), "hajaːlet")
+
+    def test_hayali_iyelik_sifat(self):
+        # şapkasız "hayali": ilgi hali önündeyse ya da ardından "bir" gelmiyorsa iyelik (hayal+i), yoksa sıfat (hayalî)
+        self.assertEqual(g2p("Bu tamamen hayali bir hikâye."), "bu tamaːmen hajaːliː biɾ hicaːje.")
+        self.assertEqual(g2p("Onun en büyük hayali bir ev almaktı."), "onun en byjyc hajaːli biɾ ev aɫmaktɯ.")
+        self.assertEqual(g2p("Çocukluk hayali gerçek oldu."), "tʃodʒukɫuk hajaːli ɟeɾtʃec oɫdu.")
+        self.assertEqual(g2p("Bu hayali bir türlü unutamadı."), "bu hajaːli biɾ tyɾly unutamadɯ.")
+        self.assertEqual(g2p("Bu hayalî bir hikâye."), "bu hajaːliː biɾ hicaːje.")
+
 
 if __name__ == "__main__":
     unittest.main()
